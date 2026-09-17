@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KFZ Joker | Auto - Sofort - Service | Wien 1100</title>
+<meta name="description" content="Kfz Joker Autowerkstatt, Laxenburger Straße 11, 1100 Wien. Reparatur, Reifen, Pannendienst. Mo bis Sa geöffnet.">
+
+<!--
+  =====================================================================
+  UNVERBINDLICHER ENTWURF / DRAFT
+  Gestaltungsentwurf für KFZ JOKER SENGÖNÜL OG, 1100 Wien.
+  Nicht beauftragt, nicht veröffentlicht, auf noindex/nofollow gesetzt.
+  Erstellt 2026-09-17 von Maksym Bespalov, bemax.myportfolio.com
+  =====================================================================
+
+  AUSGANGSLAGE
+  Es gab nichts zu übernehmen. kfzjoker.at zeigt nur den Satz
+  "Webseite wird bearbeitet, bitte besuchen Sie uns später wieder!".
+  Keine Texte, keine Hausfarbe, keine Struktur, kein Impressum.
+  Daher kein Preserve-Modus: die Seite ist neu aufgebaut, die
+  Geschäftsdaten stammen aus belegten Quellen (siehe unten).
+
+  ÜBERNOMMEN (echte Daten, mit Quelle)
+  - Firmenwortlaut KFZ JOKER SENGÖNÜL OG   (cylex.at, austriasocial)
+  - Claim "Auto - Sofort - Service"          (Visitenkarte des Betriebs)
+  - Laxenburger Straße 11, 1100 Wien        (cylex, tupalo, mapcarta)
+  - 0699 111 37 350 / 01 92 99 589           (Facebook, cylex, tupalo)
+  - office@kfzjoker.at                        (Betrieb)
+  - Mo-Fr 8-18, Sa 8-14                       (Betrieb)
+  - Google 4,8 aus 135 Bewertungen            (Google Business, wheree.com)
+  - Logofarben Gelb / Rot / Blau, Rasterschraffur der Briefkopfzeile
+
+  ZUM CLAIM
+  "Auto - Sofort - Service" steht wortgleich und in dieser Reihenfolge
+  in der Überschrift. Nur die Trennzeichen sind gesetzt statt Bindestriche,
+  weil Bindestriche am Zeilenende einer Plakatzeile hängen bleiben.
+  Am Wortlaut wurde nichts geändert.
+
+  NEU GESTALTET
+  Typografie, Raster, Hierarchie, Farbsystem, Motion.
+  Dunkle Basis, Gelb als einziger Hauptakzent, Rot und Blau nur als
+  Dreiklang der Wortmarke. Ein einziges Radius-System: 0 Pixel auf
+  allen Flächen und Schaltflächen. Kreise nur dort, wo ein Kreis
+  die Form selbst ist (Rasterpunkte, Icon-Scheiben).
+  Die Seite trägt Typografie und Zahlen, nicht Fotografie.
+
+  BILDER
+  Es wurden keine Lizenzen gekauft und keine fremden Fotos verwendet.
+  Genau ein Bildplatz ist vorgesehen und sichtbar als Platzhalter
+  ausgezeichnet. Das Logo ist als Wortmarke gesetzt, der echte
+  Jokerkopf ersetzt die Marke im Kopfbereich.
+
+  PLATZHALTER, die KFZ Joker befüllt
+  1. Leistungen: die vier genannten Punkte stammen aus
+     Branchenverzeichnissen, nicht vom Betrieb selbst. Die
+     vollständige Liste fehlt und ist sichtbar markiert.
+  2. Werkstattfoto im Band vor den Oeffnungszeiten.
+  3. Jokerkopf-Logo anstelle der Wortmarke.
+  Nichts davon wurde erfunden oder mit plausiblen Werten gefüllt.
+
+  NICHT ÜBERNOMMEN
+  Pickerl nach 57a, Klimaservice, Lackiererei und ähnliche
+  Leistungen sind für eine Wiener Werkstatt naheliegend, für
+  diesen Betrieb aber durch keine Quelle gedeckt. Sie stehen
+  deshalb bewusst nicht auf der Seite.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   Ein Akzent: Gelb. Rot und Blau ausschliesslich im Dreiklang
+   der Wortmarke, damit die Seite einen Akzent behält.
+   ============================================================ */
+:root{
+  --ink:#0b0b0c;
+  --ink-2:#141416;
+  --ink-3:#1c1c1f;
+  --line:#2a2a2e;
+  --line-soft:#212124;
+
+  --paper:#f2f0ea;
+  --muted:#96969d;
+  --muted-2:#6e6e75;
+
+  --yellow:#ffc400;
+  --yellow-ink:#1a1400;
+  --mark-red:#e2382c;
+  --mark-blue:#1f6fd0;
+
+  --radius:0px;
+
+  --shell:1240px;
+  --gutter:clamp(20px,5vw,56px);
+
+  --step-display:clamp(2.75rem,7.5vw,7.1rem);
+  --step-h2:clamp(2rem,5.2vw,3.9rem);
+  --step-h3:clamp(1.15rem,2vw,1.5rem);
+  --step-num:clamp(2.6rem,7vw,5.2rem);
+  --step-body:clamp(0.98rem,1.15vw,1.08rem);
+
+  --ease:cubic-bezier(.16,1,.3,1);
+
+  /* Rasterschraffur, abgeleitet vom Briefkopf des Betriebs */
+  --halftone:radial-gradient(circle at center,rgba(255,255,255,.16) 1.05px,transparent 1.15px);
+  --halftone-gold:radial-gradient(circle at center,rgba(255,196,0,.34) 1.15px,transparent 1.25px);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-variation-settings:'wdth' 100,'wght' 400;
+  font-size:var(--step-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
+
+/* Anzeigeschrift: Archivo in der breiten, schweren Achse.
+   Betonung immer in derselben Familie, nie durch eine zweite Schrift. */
+.display{
+  font-variation-settings:'wdth' 118,'wght' 800;
+  line-height:.92;
+  letter-spacing:-.022em;
+  text-transform:uppercase;
+  margin:0;
+}
+.h2{
+  font-size:var(--step-h2);
+  font-variation-settings:'wdth' 112,'wght' 760;
+  line-height:.98;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  margin:0;
+}
+.h3{
+  font-size:var(--step-h3);
+  font-variation-settings:'wdth' 106,'wght' 700;
+  line-height:1.15;
+  letter-spacing:-.012em;
+  margin:0;
+}
+.num{
+  font-variation-settings:'wdth' 116,'wght' 800;
+  font-variant-numeric:tabular-nums;
+  line-height:.86;
+  letter-spacing:-.03em;
+}
+.lede{color:var(--muted);max-width:52ch;margin:0}
+.eyebrow{
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted-2);
+  font-variation-settings:'wdth' 96,'wght' 600;
+  margin:0 0 1.1rem;
+}
+
+/* Icons: nur Material Symbols. Ligaturen bleiben unsichtbar,
+   bis die Schrift geladen ist, sonst steht kurz "call" im Layout. */
+.ms{
+  font-family:'Material Symbols Outlined';
+  font-weight:400;font-style:normal;
+  line-height:1;letter-spacing:normal;text-transform:none;
+  display:inline-block;white-space:nowrap;direction:ltr;
+  -webkit-font-feature-settings:'liga';font-feature-settings:'liga';
+  -webkit-font-smoothing:antialiased;
+  display:none;
+}
+.icons-ready .ms{display:inline-block}
+/* Die Icon-Scheibe erscheint nur mit dem Glyph, nie als leerer Kreis. */
+.tile-icon{display:none}
+.icons-ready .tile-icon{display:grid}
+
+/* ---------- Schaltflächen ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:1rem 1.6rem;
+  border-radius:var(--radius);
+  border:1px solid transparent;
+  font-size:.95rem;
+  font-variation-settings:'wdth' 104,'wght' 720;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  text-decoration:none;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:background .28s var(--ease),color .28s var(--ease),
+             border-color .28s var(--ease),transform .12s var(--ease);
+}
+.btn .ms{font-size:1.15em}
+.btn-primary{background:var(--yellow);color:var(--yellow-ink);border-color:var(--yellow)}
+.btn-primary:hover{background:#ffd23f;border-color:#ffd23f}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+
+/* ============================================================
+   KOPFZEILE  |  eine Zeile, 68px hoch
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:50;
+  height:68px;
+  display:flex;align-items:center;
+  background:rgba(11,11,12,.9);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-in{display:flex;align-items:center;gap:1.5rem;width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
+
+/* Wortmarke. Der echte Jokerkopf ersetzt diesen Block. */
+.mark{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.mark-dots{display:flex;gap:4px}
+.mark-dots i{width:8px;height:8px;border-radius:50%;display:block}
+.mark-dots i:nth-child(1){background:var(--mark-red)}
+.mark-dots i:nth-child(2){background:var(--yellow)}
+.mark-dots i:nth-child(3){background:var(--mark-blue)}
+.mark-name{
+  font-size:1.02rem;letter-spacing:.06em;text-transform:uppercase;
+  font-variation-settings:'wdth' 112,'wght' 800;
+}
+.nav-links{display:flex;gap:1.6rem}
+.nav-links a{
+  text-decoration:none;font-size:.85rem;color:var(--muted);
+  letter-spacing:.06em;text-transform:uppercase;
+  font-variation-settings:'wdth' 100,'wght' 600;
+  transition:color .22s var(--ease);
+}
+.nav-links a:hover{color:var(--paper)}
+.nav-tel{
+  text-decoration:none;font-size:.92rem;color:var(--paper);
+  font-variant-numeric:tabular-nums;
+  font-variation-settings:'wdth' 104,'wght' 680;
+  letter-spacing:.01em;
+}
+.nav-tel:hover{color:var(--yellow)}
+.nav .btn{padding:.68rem 1.15rem;font-size:.82rem}
+@media (max-width:1040px){.nav-links{display:none}}
+@media (max-width:620px){.nav-tel{display:none}}
+
+/* ============================================================
+   1  HERO  |  Plakat, kein Foto
+   ============================================================ */
+.hero{position:relative;overflow:hidden;padding:clamp(3.5rem,8vw,6rem) 0 clamp(3.5rem,7vw,5.5rem)}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--halftone);
+  background-size:9px 9px;
+  -webkit-mask-image:linear-gradient(200deg,#000 0%,rgba(0,0,0,.32) 42%,transparent 72%);
+  mask-image:linear-gradient(200deg,#000 0%,rgba(0,0,0,.32) 42%,transparent 72%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;right:-16vw;top:-28vh;
+  width:64vw;height:64vw;max-width:900px;max-height:900px;
+  background:radial-gradient(circle,rgba(255,196,0,.13) 0%,rgba(255,196,0,.04) 42%,transparent 68%);
+  pointer-events:none;
+}
+.hero-in{position:relative;z-index:1}
+.hero h1{font-size:var(--step-display)}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero-sub{margin:clamp(1.5rem,3vw,2.2rem) 0 0;font-size:clamp(1rem,1.5vw,1.2rem);color:var(--muted);max-width:44ch}
+.hero-cta{margin-top:clamp(1.8rem,3.5vw,2.6rem)}
+.hero-rule{
+  margin-top:clamp(2.6rem,6vw,4.2rem);
+  height:3px;width:100%;
+  background:linear-gradient(90deg,var(--yellow) 0%,var(--yellow) 22%,var(--line) 22%,var(--line) 100%);
+}
+
+/* ============================================================
+   2  LEISTUNGEN  |  Raster mit exakt 5 Feldern
+   ============================================================ */
+.sec{padding:clamp(4.5rem,10vw,8rem) 0}
+.sec-head{margin-bottom:clamp(2.2rem,4.5vw,3.4rem);max-width:60ch}
+.sec-head .lede{margin-top:1.1rem}
+
+.grid-svc{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.tile{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  padding:clamp(1.5rem,2.6vw,2.1rem);
+  border-radius:var(--radius);
+  display:flex;flex-direction:column;gap:.85rem;
+  transition:border-color .3s var(--ease),background .3s var(--ease);
+}
+.tile:hover{border-color:#3a3a40;background:var(--ink-3)}
+.tile-lead{
+  grid-column:span 7;grid-row:span 2;
+  justify-content:flex-end;
+  min-height:clamp(230px,30vw,340px);
+  position:relative;overflow:hidden;
+  border-color:#33301f;
+  background:
+    linear-gradient(150deg,rgba(255,196,0,.09) 0%,transparent 55%),
+    var(--ink-2);
+}
+.tile-lead::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--halftone-gold);
+  background-size:11px 11px;
+  -webkit-mask-image:radial-gradient(circle at 86% 12%,#000 0%,transparent 58%);
+  mask-image:radial-gradient(circle at 86% 12%,#000 0%,transparent 58%);
+  pointer-events:none;
+}
+.tile-lead>*{position:relative;z-index:1}
+.tile-a{grid-column:span 5}
+.tile-b{grid-column:span 5}
+.tile-c{grid-column:span 5}
+.tile-note{
+  grid-column:span 7;
+  border-style:dashed;border-color:#3d3a2c;
+  background:repeating-linear-gradient(135deg,rgba(255,196,0,.035) 0 10px,transparent 10px 20px),var(--ink-2);
+}
+.tile-icon{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,196,0,.11);
+  color:var(--yellow);
+  margin-bottom:.35rem;
+  place-items:center;
+}
+.tile-icon .ms{font-size:22px}
+.tile p{margin:0;color:var(--muted);font-size:.95rem}
+.tile-src{
+  margin-top:auto;padding-top:.7rem;
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted-2);
+  font-variation-settings:'wdth' 96,'wght' 600;
+}
+.flag{
+  display:inline-block;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--yellow);
+  border:1px solid rgba(255,196,0,.4);
+  padding:.32rem .6rem;
+  font-variation-settings:'wdth' 96,'wght' 700;
+  align-self:flex-start;
+}
+@media (max-width:900px){
+  .grid-svc{grid-template-columns:1fr}
+  .tile-lead,.tile-a,.tile-b,.tile-c,.tile-note{grid-column:1/-1;grid-row:auto}
+  .tile-lead{min-height:auto}
+}
+
+/* ============================================================
+   3  VERTRAUEN  |  genau ein Element, echte Google-Zahlen
+   ============================================================ */
+.trust{border-block:1px solid var(--line);background:var(--ink-2);padding:clamp(3rem,6vw,4.6rem) 0}
+.trust-in{display:flex;align-items:center;justify-content:center;gap:clamp(1.4rem,4vw,3.2rem);flex-wrap:wrap;text-align:center}
+.trust-score{font-size:clamp(4rem,11vw,7.5rem);color:var(--yellow)}
+.trust-meta{text-align:left}
+.stars{display:flex;gap:2px;color:var(--yellow);margin-bottom:.5rem}
+.stars .ms{font-size:21px;font-variation-settings:'FILL' 1}
+.stars .half{opacity:.42}
+.trust-meta p{margin:0;font-size:clamp(1rem,1.6vw,1.22rem);font-variation-settings:'wdth' 104,'wght' 640}
+.trust-asof{display:block;margin-top:.3rem;font-size:.82rem;color:var(--muted-2);letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:560px){.trust-meta{text-align:center}.stars{justify-content:center}}
+
+/* ============================================================
+   4  BILDBAND  |  einziger Bildplatz, sichtbar markiert
+   ============================================================ */
+.photo-slot{
+  min-height:clamp(200px,26vw,300px);
+  border:1px dashed #3a3a40;
+  border-radius:var(--radius);
+  background-image:var(--halftone);
+  background-size:14px 14px;
+  background-color:var(--ink-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.8rem;text-align:center;padding:2rem;
+}
+.photo-slot .ms{font-size:34px;color:var(--muted-2)}
+.photo-slot strong{
+  font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);
+  font-variation-settings:'wdth' 98,'wght' 700;
+}
+.photo-slot p{margin:0;color:var(--muted-2);font-size:.9rem;max-width:44ch}
+
+/* ============================================================
+   5  ZEITEN + ADRESSE  |  Zahlen tragen den Abschnitt
+   ============================================================ */
+.split{display:grid;grid-template-columns:1.25fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+
+.hours{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:2rem}
+.hour-card{
+  border:1px solid var(--line);
+  background:var(--ink-2);
+  padding:clamp(1.4rem,2.4vw,1.9rem);
+  border-radius:var(--radius);
+}
+.hour-card .day{
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);
+  font-variation-settings:'wdth' 96,'wght' 650;
+  margin-bottom:.7rem;
+}
+.hour-card .span{font-size:var(--step-num);color:var(--paper)}
+.hour-card .unit{font-size:.82rem;color:var(--muted-2);letter-spacing:.1em;text-transform:uppercase;margin-top:.55rem}
+.hour-card.is-open{border-color:rgba(255,196,0,.34)}
+.hour-card.is-open .span{color:var(--yellow)}
+@media (max-width:480px){.hours{grid-template-columns:1fr}}
+
+.addr{border:1px solid var(--line);background:var(--ink-2);border-radius:var(--radius);padding:clamp(1.6rem,3vw,2.2rem)}
+.addr dl{margin:0;display:grid;gap:1.35rem}
+.addr dt{
+  font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted-2);
+  font-variation-settings:'wdth' 96,'wght' 650;
+  margin-bottom:.35rem;
+}
+.addr dd{margin:0;font-size:1.02rem;line-height:1.5}
+.addr dd a{text-decoration:none;transition:color .22s var(--ease)}
+.addr dd a:hover{color:var(--yellow)}
+.addr .big{
+  font-size:clamp(1.25rem,2.2vw,1.6rem);
+  font-variation-settings:'wdth' 110,'wght' 740;
+  letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ============================================================
+   6  KONTAKT  |  zwei Kanäle, gleiche Gewichtung
+   ============================================================ */
+.contact{border-top:1px solid var(--line)}
+.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(2rem,4vw,3rem)}
+@media (max-width:760px){.ch-grid{grid-template-columns:1fr}}
+.ch{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:clamp(1.7rem,3vw,2.4rem);
+  background:var(--ink-2);
+  display:flex;flex-direction:column;gap:1rem;
+  text-decoration:none;
+  transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease);
+}
+.ch:hover{border-color:var(--yellow);background:var(--ink-3);transform:translateY(-2px)}
+.ch-top{display:flex;align-items:center;gap:.7rem;color:var(--yellow)}
+.ch-top .ms{font-size:24px}
+.ch-top span{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-variation-settings:'wdth' 96,'wght' 700}
+.ch-val{
+  font-size:clamp(1.3rem,3vw,2rem);
+  font-variation-settings:'wdth' 112,'wght' 780;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.018em;line-height:1.1;
+}
+.ch-val small{display:block;font-size:.95rem;color:var(--muted);margin-top:.5rem;font-variation-settings:'wdth' 100,'wght' 450;letter-spacing:0}
+.ch-hint{margin:0;color:var(--muted-2);font-size:.88rem}
+
+/* ---------- Fußzeile ---------- */
+.foot{border-top:1px solid var(--line-soft);padding:2.6rem 0;color:var(--muted-2);font-size:.85rem}
+.foot-in{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;align-items:center}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--paper)}
+
+/* ---------- Motion: Einblenden beim Scrollen ---------- */
+.rise{opacity:0;transform:translateY(20px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rise{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .ch:hover{transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <!-- Platzhalter für das Jokerkopf-Logo des Betriebs -->
+    <a class="mark" href="#top" aria-label="KFZ Joker, zum Seitenanfang">
+      <span class="mark-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="mark-name">KFZ Joker</span>
+    </a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#zeiten">Zeiten</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="nav-tel" href="tel:+4369911137350">0699 111 37 350</a>
+    <a class="btn btn-primary" href="tel:+4369911137350"><span class="ms" aria-hidden="true">call</span>Anrufen</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 ============ HERO ============ -->
+  <section class="hero">
+    <div class="shell hero-in">
+      <h1 class="display">Auto. <em>Sofort.</em><br>Service.</h1>
+      <p class="hero-sub">Kfz-Werkstatt in Wien Favoriten. Laxenburger Straße 11, Montag bis Samstag geöffnet.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="tel:+4369911137350"><span class="ms" aria-hidden="true">call</span>Anrufen</a>
+      </div>
+      <div class="hero-rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 2 ============ LEISTUNGEN ============ -->
+  <section class="sec" id="leistungen">
+    <div class="shell">
+      <div class="sec-head rise">
+        <p class="eyebrow">Leistungen</p>
+        <h2 class="h2">Was in der Werkstatt<br>gemacht wird</h2>
+      </div>
+
+      <div class="grid-svc">
+
+        <article class="tile tile-lead rise">
+          <div class="tile-icon"><span class="ms" aria-hidden="true">car_repair</span></div>
+          <h3 class="h3">Kfz-Reparatur und Werkstatt</h3>
+          <p>Der Kern des Betriebs an der Laxenburger Straße. Reparatur und Service am Fahrzeug.</p>
+          <p class="tile-src">Belegt durch mehrere Verzeichnisse</p>
+        </article>
+
+        <article class="tile tile-a rise">
+          <div class="tile-icon"><span class="ms" aria-hidden="true">tire_repair</span></div>
+          <h3 class="h3">Reifen</h3>
+          <p class="tile-src">Belegt durch ein Verzeichnis</p>
+        </article>
+
+        <article class="tile tile-b rise">
+          <div class="tile-icon"><span class="ms" aria-hidden="true">local_shipping</span></div>
+          <h3 class="h3">Pannen- und Abschleppdienst</h3>
+          <p class="tile-src">Belegt durch ein Verzeichnis</p>
+        </article>
+
+        <article class="tile tile-c rise">
+          <div class="tile-icon"><span class="ms" aria-hidden="true">directions_car</span></div>
+          <h3 class="h3">Fahrzeughandel</h3>
+          <p class="tile-src">Belegt durch ein Verzeichnis</p>
+        </article>
+
+        <!-- Sichtbarer Platzhalter. Kein Wert wurde ergänzt oder geraten. -->
+        <article class="tile tile-note rise">
+          <span class="flag">Platzhalter</span>
+          <h3 class="h3">Ihre vollständige Leistungsliste</h3>
+          <p>Die vier Punkte oben stammen aus öffentlichen Branchenverzeichnissen, nicht von KFZ Joker selbst. Was der Betrieb tatsächlich anbietet, trägt der Inhaber hier ein. Es wurde nichts dazu erfunden.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 ============ VERTRAUEN ============ -->
+  <!-- Ein einziges Vertrauenselement. Beide Zahlen stammen aus dem
+       Google-Business-Eintrag des Betriebs (4,8 aus 135 Bewertungen).
+       Keine Zitate, keine Namen, keine Portraits. -->
+  <section class="trust" aria-label="Bewertung">
+    <div class="shell trust-in rise">
+      <div class="num trust-score">4,8</div>
+      <div class="trust-meta">
+        <div class="stars" aria-hidden="true">
+          <span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms">star</span><span class="ms half">star</span>
+        </div>
+        <p>aus 135 Google-Bewertungen</p>
+        <span class="trust-asof">Stand der Erhebung: September 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ============ BILDBAND ============ -->
+  <section class="sec" aria-label="Bildplatz">
+    <div class="shell">
+      <!-- Einziger Bildplatz der Seite. Es wurden keine Lizenzen gekauft. -->
+      <div class="photo-slot rise">
+        <span class="ms" aria-hidden="true">photo_camera</span>
+        <strong>Platzhalter: Foto der Werkstatt</strong>
+        <p>Hier kommen eigene Aufnahmen von KFZ Joker hin, Halle oder Team. Es wurde bewusst kein fremdes Bild eingesetzt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 ============ ZEITEN + ADRESSE ============ -->
+  <section class="sec" id="zeiten">
+    <div class="shell split">
+
+      <div class="rise">
+        <h2 class="h2">Offen, wenn Sie<br>vorbeikommen</h2>
+        <div class="hours">
+          <div class="hour-card is-open">
+            <div class="day">Montag bis Freitag</div>
+            <div class="num span">8-18</div>
+            <div class="unit">Uhr</div>
+          </div>
+          <div class="hour-card is-open">
+            <div class="day">Samstag</div>
+            <div class="num span">8-14</div>
+            <div class="unit">Uhr</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="addr rise">
+        <dl>
+          <div>
+            <dt>Adresse</dt>
+            <dd class="big">Laxenburger Straße 11<br>1100 Wien</dd>
+          </div>
+          <div>
+            <dt>Telefon</dt>
+            <dd class="big"><a href="tel:+4369911137350">0699 111 37 350</a></dd>
+            <dd class="big"><a href="tel:+4319299589">01 92 99 589</a></dd>
+          </div>
+          <div>
+            <dt>E-Mail</dt>
+            <dd><a href="mailto:office@kfzjoker.at">office@kfzjoker.at</a></dd>
+          </div>
+          <div>
+            <dt>Firmenwortlaut</dt>
+            <dd>KFZ JOKER SENGÖNÜL OG</dd>
+          </div>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6 ============ KONTAKT ============ -->
+  <section class="sec contact" id="kontakt">
+    <div class="shell">
+      <div class="sec-head rise">
+        <h2 class="h2">Kurz durchsagen,<br>was das Auto hat</h2>
+        <p class="lede">Anrufen oder schreiben. Beides geht direkt an die Werkstatt.</p>
+      </div>
+
+      <div class="ch-grid">
+        <a class="ch rise" href="tel:+4369911137350">
+          <span class="ch-top"><span class="ms" aria-hidden="true">call</span><span>Telefon</span></span>
+          <span class="ch-val">0699 111 37 350<small>oder 01 92 99 589</small></span>
+          <p class="ch-hint">Mo bis Fr 8 bis 18 Uhr, Sa 8 bis 14 Uhr</p>
+        </a>
+
+        <a class="ch rise" href="https://wa.me/4369911137350" target="_blank" rel="noopener noreferrer">
+          <span class="ch-top"><span class="ms" aria-hidden="true">chat</span><span>WhatsApp</span></span>
+          <span class="ch-val">Nachricht senden<small>an 0699 111 37 350</small></span>
+          <p class="ch-hint">Fotos vom Schaden können Sie gleich mitschicken</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="shell foot-in">
+    <span>KFZ JOKER SENGÖNÜL OG, Laxenburger Straße 11, 1100 Wien</span>
+    <span><a href="tel:+4319299589">01 92 99 589</a> &nbsp; <a href="mailto:office@kfzjoker.at">office@kfzjoker.at</a></span>
+  </div>
+</footer>
+
+<script>
+// Icons erst zeigen, wenn die Symbolschrift nachweislich geladen ist.
+// document.fonts.check() genügt nicht: es meldet auch dann true, wenn die
+// Schrift fehlt und der Browser auf die Ersatzschrift fällt. Eine reine
+// Breitenmessung genügt ebenfalls nicht, weil die Ersatzschrift zufällig
+// ähnlich breit sein kann. Deshalb der Vergleich: "call" wird einmal mit
+// der Symbolschrift vor der Ersatzschrift gemessen und einmal nur mit der
+// Ersatzschrift. Fehlt die Symbolschrift, sind beide Breiten gleich.
+// Bleibt sie aus, bleiben die Icons aus und im Layout steht nie das Wort
+// "call" anstelle des Hörersymbols.
+(function(){
+  function width(stack){
+    var s=document.createElement('span');
+    s.textContent='call';
+    s.setAttribute('aria-hidden','true');
+    s.style.cssText='position:absolute;left:-9999px;top:0;font-size:64px;'+
+                    'line-height:1;white-space:nowrap;font-family:'+stack+';';
+    document.body.appendChild(s);
+    var w=s.offsetWidth;
+    s.parentNode.removeChild(s);
+    return w;
+  }
+  function drawn(){
+    var fallbacks=['monospace','serif'];
+    for(var i=0;i<fallbacks.length;i++){
+      var base=width(fallbacks[i]);
+      var test=width('"Material Symbols Outlined",'+fallbacks[i]);
+      if(base>0&&Math.abs(test-base)>4){return true}
+    }
+    return false;
+  }
+  function attempt(left){
+    if(drawn()){document.documentElement.classList.add('icons-ready');return}
+    if(left>0){setTimeout(function(){attempt(left-1)},400)}
+  }
+  if(document.fonts&&document.fonts.load){
+    document.fonts.load('24px "Material Symbols Outlined"')['catch'](function(){});
+  }
+  if(document.readyState==='complete'){attempt(6)}
+  else{window.addEventListener('load',function(){attempt(6)})}
+})();
+
+// Einblenden beim Scrollen. IntersectionObserver, kein Scroll-Listener.
+// Zweck: die Abschnitte nacheinander lesbar machen, nicht Dekoration.
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.rise');
+  if(reduce||!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('in')});
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+    });
+  },{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el,i){el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
+})();
+</script>
+
+</body>
+</html>
