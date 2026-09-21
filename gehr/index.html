@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gehr Boote</title>
+<meta name="description" content="Redesign-Entwurf für Gehr Boote, Fischerstrand 21, 1220 Wien.">
+<meta name="robots" content="noindex, nofollow">
+
+<!--
+  ============================================================================
+  REDESIGN-ENTWURF / DRAFT, nicht die Website von Gehr Boote.
+  Erstellt als unverbindlicher Vorschlag. Kein Auftrag, keine Veröffentlichung.
+
+  INHALT: Alle deutschen Texte stammen wörtlich von gehrboote.at, ebenso alle
+  Fotos, Modellbezeichnungen und Kontaktdaten. Nichts ist erfunden.
+
+  Redaktionell korrigiert wurden nur offensichtliche Tippfehler des Originals:
+    "Das Der Fokus"            -> "Der Fokus"
+    "alles, dass Sie ..."      -> "alles, was Sie ..."
+    "Elektromotore"            -> "Elektromotoren"
+    Gedankenstrich in "CE Kennzeichnung" -> Bindestrich
+
+  NOCH ZU KLAEREN (bewusst NICHT erfunden, Platzhalter im Markup markiert):
+    - Oeffnungszeiten
+    - Impressum: Firmenwortlaut, UID, Firmenbuchnummer, Behoerde (§ 5 ECG)
+    - Datenschutzerklaerung
+    - Bootseinstellung: Leistung steht auf der Tafel am Tor, aber nirgends
+      auf der Website. Bewusst ausgelassen, solange der Inhalt nicht bestaetigt ist.
+    - Technische Daten und Preise: auf der bestehenden Website existiert dazu
+      keine einzige Angabe.
+  ============================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- tokens ----------------------------------------------------
+   Der Entwurf ist bewusst auf Dunkel festgelegt, damit er bei jedem gleich
+   aussieht. Die hellen Werte liegen fertig darunter: data-theme am <html>
+   entfernen, und die Seite folgt wieder der Systemeinstellung.
+   ---------------------------------------------------------------------- */
+:root{
+  --bg:#070B24; --bg-2:#0B1033;
+  --panel:#000060;            /* Markenblau aus dem Logo */
+  --on-panel:#E9ECF5;
+  --fg:#E9ECF5; --fg-dim:#A5AEC9;
+  --line:rgba(233,236,245,.15);
+  --accent:#5FAABC; --on-accent:#051018;
+  --field:#ECEFF6; --field-fg:#070B24; --field-line:rgba(7,11,36,.28);
+  --maxw:1280px;
+  --pad:clamp(20px,5vw,72px);
+  --r:0px;                     /* Formensystem: durchgehend kantig */
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#ECEFF6; --bg-2:#FFFFFF;
+    --fg:#070B24; --fg-dim:#4A5375;
+    --line:rgba(7,11,36,.16);
+    --accent:#2E6E7E; --on-accent:#FFFFFF;
+    --field:#FFFFFF; --field-fg:#070B24; --field-line:rgba(7,11,36,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#070B24; --bg-2:#0B1033; --fg:#E9ECF5; --fg-dim:#A5AEC9;
+  --line:rgba(233,236,245,.15); --accent:#5FAABC; --on-accent:#051018;
+  --field:#ECEFF6; --field-fg:#070B24; --field-line:rgba(7,11,36,.28);
+}
+
+/* ---------- base ------------------------------------------------------ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:Archivo,"Segoe UI",Roboto,system-ui,sans-serif;
+  font-size:17px; line-height:1.6; letter-spacing:-.005em;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block; max-width:100%; height:auto}
+a{color:inherit}
+h1,h2,h3{margin:0; font-weight:700; letter-spacing:-.03em; line-height:1.04}
+p{margin:0}
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; letter-spacing:.06em}
+
+.ms{
+  font-family:"Material Symbols Outlined"; font-weight:400; font-style:normal;
+  line-height:1; letter-spacing:normal; text-transform:none; white-space:nowrap;
+  direction:ltr; -webkit-font-feature-settings:'liga'; font-feature-settings:'liga';
+  display:none;                         /* Ligatur erst zeigen, wenn Font wirklich da ist */
+}
+.icons-ready .ms{display:inline-block}
+
+:where(a,button,input,textarea,summary):focus-visible{
+  outline:2px solid var(--accent); outline-offset:3px;
+}
+
+/* ---------- buttons --------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem; white-space:nowrap;
+  padding:.85rem 1.5rem; border-radius:var(--r); border:1px solid transparent;
+  font-size:.95rem; font-weight:600; text-decoration:none; cursor:pointer;
+  transition:transform .18s cubic-bezier(.16,1,.3,1), background-color .18s, color .18s, border-color .18s;
+}
+.btn-primary{background:var(--accent); color:var(--on-accent)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0) scale(.985)}
+.btn-ghost{border-color:currentColor; color:var(--fg); background:transparent}
+.btn-ghost:hover{background:var(--fg); color:var(--bg); transform:translateY(-2px)}
+.btn-ghost:active{transform:translateY(0) scale(.985)}
+.on-panel .btn-ghost{color:var(--on-panel)}
+.on-panel .btn-ghost:hover{background:var(--on-panel); color:var(--panel)}
+
+/* ---------- header ---------------------------------------------------- */
+.hdr{
+  position:sticky; top:0; z-index:40; height:68px;
+  display:flex; align-items:center;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+@supports not (backdrop-filter:blur(2px)){ .hdr{background:var(--bg)} }
+.hdr .wrap{display:flex; align-items:center; gap:1.5rem; width:100%}
+.hdr img{height:30px; width:auto}
+@media (prefers-color-scheme:dark){ .hdr img, .ft img{filter:invert(1) brightness(1.9)} }
+:root[data-theme="dark"] .hdr img, :root[data-theme="dark"] .ft img{filter:invert(1) brightness(1.9)}
+.nav{display:flex; gap:1.75rem; margin-left:auto; font-size:.9rem; font-weight:500}
+.nav a{text-decoration:none; color:var(--fg-dim); transition:color .18s}
+.nav a:hover{color:var(--fg)}
+.hdr .tel{
+  display:inline-flex; align-items:center; gap:.45rem; text-decoration:none;
+  font-weight:600; font-size:.92rem; padding:.55rem .95rem;
+  border:1px solid var(--line); border-radius:var(--r); transition:border-color .18s,color .18s;
+}
+.hdr .tel:hover{border-color:var(--accent); color:var(--accent)}
+.hdr .tel .ms{font-size:18px}
+@media (max-width:860px){
+  .nav{display:none}
+  .hdr .tel{margin-left:auto}
+}
+
+/* ---------- hero: asymmetrischer Split, kein Text auf dem Foto -------- */
+.hero{display:grid; grid-template-columns:1fr; border-bottom:1px solid var(--line)}
+.hero-media{order:-1; aspect-ratio:16/10; overflow:hidden; background:var(--bg-2)}
+.hero-media img{width:100%; height:100%; object-fit:cover}
+.hero-copy{padding:clamp(32px,7vw,64px) var(--pad) clamp(40px,8vw,72px)}
+.hero h1{font-size:clamp(2.05rem,6.2vw,3.45rem); max-width:17ch}
+.hero .lede{
+  margin-top:1.15rem; color:var(--fg-dim); font-size:clamp(1rem,2.4vw,1.18rem);
+  max-width:46ch; line-height:1.5;
+}
+.hero-cta{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2rem}
+@media (min-width:900px){
+  .hero{grid-template-columns:minmax(0,46fr) minmax(0,54fr); align-items:stretch}
+  .hero-media{order:0; aspect-ratio:auto; min-height:clamp(440px,60vh,600px)}
+  .hero-copy{
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(48px,6vh,80px) clamp(40px,5vw,80px);
+  }
+}
+
+/* ---------- Abschnittsrahmen ------------------------------------------ */
+.sec{padding-block:clamp(56px,9vw,104px)}
+.sec-head{max-width:54ch}
+.sec-head h2{font-size:clamp(1.7rem,4.6vw,2.6rem)}
+.sec-head p{margin-top:.9rem; color:var(--fg-dim); font-size:1.03rem}
+
+/* ---------- Sortiment: Bento mit genau 5 Zellen ----------------------- */
+.bento{display:grid; gap:14px; margin-top:clamp(28px,4vw,44px); grid-template-columns:1fr}
+@media (min-width:760px){ .bento{grid-template-columns:repeat(6,1fr)} }
+.cell{
+  position:relative; display:flex; flex-direction:column; min-height:190px;
+  border:1px solid var(--line); border-radius:var(--r); overflow:hidden;
+  background:var(--bg-2); text-decoration:none;
+  transition:border-color .22s, transform .22s cubic-bezier(.16,1,.3,1);
+}
+.cell:hover{border-color:var(--accent); transform:translateY(-3px)}
+.cell-photo{aspect-ratio:16/10; overflow:hidden; background:var(--bg)}
+.cell-photo img{width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.cell:hover .cell-photo img{transform:scale(1.035)}
+.cell-body{padding:1.25rem 1.35rem 1.45rem; display:flex; flex-direction:column; gap:.55rem; flex:1}
+.cell h3{font-size:1.18rem}
+.cell .note{color:var(--fg-dim); font-size:.93rem}
+.cell .models{
+  margin-top:auto; padding-top:.85rem; border-top:1px solid var(--line);
+  font-size:.79rem; color:var(--fg-dim); text-transform:uppercase;
+  display:flex; flex-wrap:wrap; gap:.3rem 1.1rem;
+}
+.cell.is-brand{background:var(--panel); color:var(--on-panel); border-color:transparent}
+.cell.is-brand .cell-body{justify-content:center; gap:.7rem}
+.cell.is-brand .models{margin-top:1.1rem}
+.cell.is-brand .note{color:rgba(233,236,245,.72)}
+.cell.is-brand .models{color:rgba(233,236,245,.6); border-top-color:rgba(233,236,245,.2)}
+@media (min-width:760px){
+  .c1{grid-column:span 3} .c2{grid-column:span 3}
+  .c3{grid-column:span 2} .c4{grid-column:span 2} .c5{grid-column:span 2}
+}
+
+/* ---------- Corsiva: Band + horizontale Scroll-Strecke ---------------- */
+.band{background:var(--bg-2); border-block:1px solid var(--line)}
+.corsiva-top{max-width:64ch}
+.corsiva-top .body{margin-top:1.2rem}
+.corsiva-top .kicker{
+  font-size:.82rem; color:var(--accent); text-transform:uppercase; margin-bottom:.7rem;
+}
+.corsiva-top h2{font-size:clamp(1.7rem,4.6vw,2.6rem)}
+.corsiva-top .body p{color:var(--fg-dim); font-size:1.02rem}
+.corsiva-top .body p + p{margin-top:.85rem}
+.rail{
+  display:flex; gap:14px; margin-top:clamp(28px,4vw,44px);
+  overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin;
+  padding-bottom:14px; padding-inline:var(--pad);
+  margin-inline:calc(var(--pad) * -1);
+}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--line)}
+.shot{flex:0 0 clamp(228px,62vw,320px); scroll-snap-align:start}
+.shot img{width:100%; aspect-ratio:400/284; object-fit:cover; border:1px solid var(--line)}
+.shot figcaption{margin-top:.65rem; font-size:.84rem; color:var(--fg-dim)}
+
+/* ---------- Ausruestung: vollflaechiges Bild + Aussage ---------------- */
+.equip{position:relative; display:grid; grid-template-columns:1fr}
+.equip-media{aspect-ratio:16/9; overflow:hidden}
+.equip-media img{width:100%; height:100%; object-fit:cover}
+.equip-copy{background:var(--panel); color:var(--on-panel); padding:clamp(32px,6vw,64px) var(--pad)}
+.equip-copy h2{font-size:clamp(1.55rem,4.2vw,2.3rem)}
+.equip-copy p{margin-top:1.1rem; color:rgba(233,236,245,.8); max-width:52ch}
+.equip-copy .brands{
+  margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid rgba(233,236,245,.22);
+  display:flex; flex-wrap:wrap; gap:.6rem 1.9rem;
+  font-size:.83rem; color:rgba(233,236,245,.72); text-transform:uppercase;
+}
+@media (min-width:900px){
+  .equip{grid-template-columns:minmax(0,55fr) minmax(0,45fr)}
+  .equip-media{aspect-ratio:auto; min-height:460px}
+  .equip-copy{display:flex; flex-direction:column; justify-content:center; padding-inline:clamp(40px,4.5vw,64px)}
+}
+
+/* ---------- Kontakt ---------------------------------------------------- */
+.kontakt{display:grid; gap:clamp(36px,5vw,64px)}
+@media (min-width:980px){ .kontakt{grid-template-columns:minmax(0,42fr) minmax(0,58fr)} }
+.kontakt h2{font-size:clamp(1.7rem,4.6vw,2.6rem)}
+.dial{
+  display:flex; align-items:center; gap:.7rem; margin-top:1.6rem;
+  font-size:clamp(1.45rem,5.4vw,1.95rem); font-weight:700; letter-spacing:-.02em;
+  text-decoration:none; color:var(--accent);
+}
+.dial .ms{font-size:26px}
+.dial:hover{text-decoration:underline; text-underline-offset:5px}
+.facts{margin-top:1.9rem; display:grid; gap:1.05rem}
+.fact{display:flex; gap:.8rem; align-items:flex-start; color:var(--fg-dim); font-size:.98rem}
+.fact .ms{font-size:20px; color:var(--accent); flex:none; margin-top:.15rem}
+.fact a{color:inherit}
+.fact strong{display:block; color:var(--fg); font-weight:600}
+
+form{display:grid; gap:1.05rem}
+.row{display:grid; gap:1.05rem}
+@media (min-width:560px){ .row{grid-template-columns:1fr 1fr} }
+.field{display:grid; gap:.45rem}
+.field label{font-size:.82rem; font-weight:600; color:var(--fg)}
+.field input,.field textarea{
+  font:inherit; font-size:1rem; padding:.8rem .9rem; border-radius:var(--r);
+  border:1px solid var(--field-line); background:var(--field); color:var(--field-fg);
+  width:100%; transition:border-color .18s;
+}
+.field textarea{min-height:130px; resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#5A6486}
+.field input:focus,.field textarea:focus{border-color:var(--accent); outline-offset:1px}
+.consent{display:flex; gap:.7rem; align-items:flex-start; font-size:.87rem; color:var(--fg-dim)}
+.consent input{margin-top:.25rem; width:18px; height:18px; flex:none; accent-color:var(--accent)}
+.hint{font-size:.82rem; color:var(--fg-dim)}
+
+/* ---------- Footer ----------------------------------------------------- */
+.ft{border-top:1px solid var(--line); padding-block:clamp(36px,5vw,56px); font-size:.9rem}
+.ft-grid{display:grid; gap:1.8rem}
+@media (min-width:760px){ .ft-grid{grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem} }
+.ft img{height:28px; width:auto}
+.ft p{color:var(--fg-dim); margin-top:.9rem; max-width:34ch}
+.ft h4{margin:0 0 .8rem; font-size:.78rem; text-transform:uppercase; color:var(--fg); letter-spacing:.08em; font-weight:600}
+.ft ul{list-style:none; margin:0; padding:0; display:grid; gap:.55rem}
+.ft ul a{color:var(--fg-dim); text-decoration:none; transition:color .18s}
+.ft ul a:hover{color:var(--accent)}
+.ft-note{
+  margin-top:2.4rem; padding-top:1.3rem; border-top:1px solid var(--line);
+  color:var(--fg-dim); font-size:.82rem;
+}
+
+/* ---------- Motion (MOTION_INTENSITY 4) -------------------------------- */
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1; transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+}
+</style>
+</head>
+
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <a href="#top" aria-label="Gehr Boote, Startseite"><img src="img/logo-gehr.webp" alt="Gehr Boote" width="800" height="346"></a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#sortiment">Sortiment</a>
+      <a href="#corsiva">Corsiva</a>
+      <a href="#ausruestung">Ausrüstung</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="tel" href="tel:+4312690741"><span class="ms" aria-hidden="true">call</span>+43 1 269 07 41</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO: asymmetrischer Split. Typo lebt im Farbfeld, nicht auf dem Foto. -->
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Bald stechen wir wieder in See.</h1>
+      <p class="lede">Unsere eigenen Boote der KAP Serie, Corsiva Yachting, Tretboote von Martini und Holzzillen von Witti.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#sortiment">Sortiment ansehen</a>
+        <a class="btn btn-ghost" href="#kontakt">Anfrage senden</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="img/hero-605-aerial.webp" alt="Eine Corsiva 605 New Age in Fahrt" width="1800" height="900" fetchpriority="high">
+    </div>
+  </section>
+
+  <!-- SORTIMENT: Bento, genau 5 Zellen fuer 5 Programme. -->
+  <section class="sec" id="sortiment">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Unser Sortiment</h2>
+        <p>Hier finden Sie einen kleinen Auszug aus unserem umfassenden Sortiment. Wir führen ausschließlich Produkte in zuverlässiger Qualität, und das in allen Bereichen.</p>
+      </div>
+
+      <div class="bento">
+        <a class="cell c1 rv" href="#corsiva">
+          <div class="cell-photo"><img src="img/corsiva-605-newage.webp" alt="Corsiva 605 New Age am Wasser" width="1400" height="1049" loading="lazy"></div>
+          <div class="cell-body">
+            <h3>Corsiva New Age</h3>
+            <p class="note">Boote aus GFK, in Farbe, Polsterung und Ausstattung frei konfigurierbar.</p>
+            <p class="models mono"><span>505</span><span>565</span><span>605</span></p>
+          </div>
+        </a>
+
+        <a class="cell c2 rv" href="#corsiva">
+          <div class="cell-photo"><img src="img/corsiva-595-tender.webp" alt="Corsiva 595 Tender vor historischen Speichern" width="1070" height="638" loading="lazy"></div>
+          <div class="cell-body">
+            <h3>Corsiva Tender</h3>
+            <p class="note">Die zweite der beiden beliebtesten Modellreihen von Corsiva Yachting.</p>
+            <p class="models mono"><span>500</span><span>595</span><span>625</span><span>650</span></p>
+          </div>
+        </a>
+
+        <div class="cell c3 is-brand rv">
+          <div class="cell-body">
+            <h3>Gehr KAP Serie</h3>
+            <p class="note">Unsere eigenen Freizeitboote.</p>
+            <p class="models mono"><span>KAP 450</span><span>KAP 480</span></p>
+          </div>
+        </div>
+
+        <a class="cell c4 rv" href="#kontakt">
+          <div class="cell-photo"><img src="img/martini-tretboote.webp" alt="Tretboote von Martini am Strand" width="1070" height="638" loading="lazy"></div>
+          <div class="cell-body">
+            <h3>Tretboote Martini</h3>
+            <p class="note">Costruzioni Nautiche.</p>
+            <p class="models mono"><span>Sunny H2O</span><span>Happy Hour</span><span>Sunny Time</span></p>
+          </div>
+        </a>
+
+        <div class="cell c5 is-brand rv">
+          <div class="cell-body">
+            <h3>Holz-Zillen von Witti</h3>
+            <p class="note">Zillen in klassischer Holzbauweise.</p>
+            <p class="models mono"><span>Flusszille</span><span>Ruderzille 4 m</span><span>Motorzille 6,5 m</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORSIVA: Band mit horizontaler Bildstrecke. -->
+  <section class="band" id="corsiva">
+    <div class="sec">
+      <div class="wrap">
+        <div class="corsiva-top rv">
+          <p class="kicker mono">New Age of Classics</p>
+          <h2>Corsiva Yachting</h2>
+          <div class="body">
+            <p>CORSIVA YACHTING ist ein Familienbetrieb, der seit nunmehr über 20 Jahren besteht. Der Fokus des Unternehmens liegt in der Produktion von Booten aus GFK.</p>
+            <p>Alle Modelle können hinsichtlich Farbe, Polsterung und Ausstattung nach Ihren individuellen Wünschen gestaltet werden. Alle Boote sind mit der CE-Kennzeichnung zertifiziert.</p>
+          </div>
+        </div>
+
+        <div class="rail rv">
+          <figure class="shot"><img src="img/t-605-na-a.webp" alt="Corsiva 605 New Age" width="400" height="284" loading="lazy"><figcaption>Corsiva 605 New Age</figcaption></figure>
+          <figure class="shot"><img src="img/t-500-tender.webp" alt="Corsiva 500 Tender" width="400" height="284" loading="lazy"><figcaption>Corsiva 500 Tender</figcaption></figure>
+          <figure class="shot"><img src="img/t-650-tender.webp" alt="Corsiva 650 Tender" width="400" height="284" loading="lazy"><figcaption>Corsiva 650 Tender</figcaption></figure>
+          <figure class="shot"><img src="img/t-605-na-b.webp" alt="Corsiva 605 New Age" width="400" height="284" loading="lazy"><figcaption>Corsiva 605 New Age</figcaption></figure>
+          <figure class="shot"><img src="img/t-650-tender-b.webp" alt="Corsiva 650 Tender" width="400" height="284" loading="lazy"><figcaption>Corsiva 650 Tender</figcaption></figure>
+          <figure class="shot"><img src="img/t-605-na-c.webp" alt="Corsiva 605 New Age" width="400" height="284" loading="lazy"><figcaption>Corsiva 605 New Age</figcaption></figure>
+          <figure class="shot"><img src="img/t-650-tender-c.webp" alt="Corsiva 650 Tender" width="400" height="284" loading="lazy"><figcaption>Corsiva 650 Tender</figcaption></figure>
+          <figure class="shot"><img src="img/t-605-na-d.webp" alt="Corsiva 605 New Age" width="400" height="284" loading="lazy"><figcaption>Corsiva 605 New Age</figcaption></figure>
+        </div>
+
+        <p class="hint rv" style="margin-top:1.4rem">Die verschiedenen Modelle weisen, auch je nach spezifischen Kundenwünschen, unterschiedliche Lieferzeiten auf.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUSRUESTUNG: vollflaechiges Foto gegen Markenfeld. -->
+  <section class="equip" id="ausruestung">
+    <div class="equip-media">
+      <img src="img/rotodock-stege.webp" alt="Schwimmstege mit Booten am Steg" width="1070" height="638" loading="lazy">
+    </div>
+    <div class="equip-copy on-panel">
+      <h2>Elektroantrieb und Zubehör</h2>
+      <p>Natürlich führen wir auch alles, was Sie zum elektrischen Antrieb Ihres Bootes benötigen. Weiters führen wir noch einige andere Produkte, wie zum Beispiel Rotodock Schwimmstege.</p>
+      <p class="brands mono">
+        <span>Minn Kota</span><span>ePropulsion</span><span>Banner</span><span>Fronius</span><span>Rotodock</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="sec" id="kontakt">
+    <div class="wrap kontakt">
+      <div class="rv">
+        <h2>Kontakt</h2>
+        <a class="dial" href="tel:+4312690741"><span class="ms" aria-hidden="true">call</span>+43 1 269 07 41</a>
+        <div class="facts">
+          <p class="fact"><span class="ms" aria-hidden="true">mail</span><span><strong>E-Mail</strong><a href="mailto:office@gehrboote.at">office@gehrboote.at</a></span></p>
+          <p class="fact"><span class="ms" aria-hidden="true">place</span><span><strong>Adresse</strong>Fischerstrand 21, 1220 Wien</span></p>
+          <!-- Oeffnungszeiten fehlen auf der bestehenden Website. Bewusst nicht erfunden. -->
+        </div>
+        <p class="hint" style="margin-top:1.9rem">Für sämtliche Fragen und Auskünfte stehen wir selbstverständlich gerne zur Verfügung.</p>
+      </div>
+
+      <!-- Entwurf: Felder wie im Original. Ohne Backend, nichts wird gesendet. -->
+      <form class="rv" novalidate onsubmit="return false">
+        <div class="row">
+          <div class="field"><label for="f-vn">Vorname</label><input id="f-vn" name="vorname" type="text" autocomplete="given-name"></div>
+          <div class="field"><label for="f-nn">Nachname</label><input id="f-nn" name="nachname" type="text" autocomplete="family-name"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel"></div>
+          <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email"></div>
+        </div>
+        <div class="field"><label for="f-msg">Ihre Nachricht</label><textarea id="f-msg" name="nachricht"></textarea></div>
+        <label class="consent" for="f-ok">
+          <input id="f-ok" name="datenschutz" type="checkbox">
+          <span>Ja, ich bin damit einverstanden, dass meine Daten im Zuge dieser Anfrage übermittelt und verarbeitet werden.</span>
+        </label>
+        <div><button class="btn btn-primary" type="submit">Senden</button></div>
+        <p class="hint">Entwurfsansicht. Das Formular ist noch nicht angebunden.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <img src="img/logo-gehr.webp" alt="Gehr Boote" width="800" height="346">
+        <p>Fischerstrand 21, 1220 Wien</p>
+      </div>
+      <div>
+        <h4>Sortiment</h4>
+        <ul>
+          <li><a href="#corsiva">Corsiva Yachting</a></li>
+          <li><a href="#sortiment">Gehr KAP Serie</a></li>
+          <li><a href="#sortiment">Tretboote Martini</a></li>
+          <li><a href="#sortiment">Holz-Zillen von Witti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <!-- Pflichtangaben nach § 5 ECG und DSGVO Art. 13. Inhalte fehlen noch. -->
+        <ul>
+          <li><a href="#kontakt">Impressum</a></li>
+          <li><a href="#kontakt">Datenschutzerklärung</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="ft-note">Unverbindlicher Redesign-Entwurf für Gehr Boote. Alle Texte, Fotos und Modellbezeichnungen stammen von gehrboote.at.</p>
+  </div>
+</footer>
+
+<script>
+/* Symbole erst freigeben, wenn der Font geladen ist. Faellt er aus, bleibt die
+   Seite ohne Symbole lesbar, statt die Ligaturnamen als Text zu zeigen. */
+(function(){
+  if (!document.fonts || !document.fonts.load) return;
+  function loaded(){
+    var ok = false;
+    document.fonts.forEach(function(f){
+      if (f.family.indexOf('Material Symbols') > -1 && f.status === 'loaded') ok = true;
+    });
+    return ok;
+  }
+  document.fonts.load('24px "Material Symbols Outlined"', 'call')
+    .then(function(){ if (loaded()) document.documentElement.classList.add('icons-ready'); })
+    .catch(function(){});
+})();
+
+/* Scroll-Reveal: ordnet die Abschnitte beim Eintreten, kein Scroll-Listener. */
+(function(){
+  var items = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
