@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AySail Yachtservice</title>
+<meta name="description" content="Redesign-Entwurf für AySail GmbH, Industriegebiet 6, 4863 Seewalchen am Attersee.">
+
+<!--
+  ===========================================================================
+  REDESIGN-ENTWURF / DRAFT. Nicht die Website der AySail GmbH.
+  Unverbindlicher Vorschlag, kein Auftrag, keine Veröffentlichung.
+
+  INHALT: Alle Texte, Leistungen, Zahlen, Fotos und Kontaktdaten stammen von
+  aysail.at. Nichts ist erfunden.
+
+  Redaktionell vereinheitlicht:
+    - Durchgehend "Sie" statt Mischung aus "Du" und "Sie".
+    - Durchgehend deutsche Überschriften statt "YOUR BOAT IS OUR MISSION",
+      "WE CARE", "WE REPAIR".
+    - "Wir Melden uns" -> "Wir melden uns" (Tippfehler des Originals).
+    - Kontaktdaten stehen einmal statt dreimal.
+
+  BARRIEREFREIHEIT: Das Original setzt weißen Text auf das helle Markentürkis
+  #00AAA0, das ergibt 2,8:1 und liegt unter WCAG AA. Hier trägt Text nur das
+  tiefere #00706A (5,5:1), das helle Türkis bleibt dekorativ.
+
+  NOCH ZU KLAEREN (bewusst NICHT erfunden):
+    - Straße des Firmensitzes, Firmenbuchnummer und UID. Im Screenshot der
+      bestehenden Seite nicht lesbar, daher unten im Impressum ausgespart
+      und beim Aufbau aus dem bestehenden Impressum zu übernehmen.
+    - Öffnungszeiten und Preise stehen nirgends auf der bestehenden Seite.
+  ===========================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- tokens -----------------------------------------------------
+   Entwurf auf Hell festgelegt, damit er bei jedem gleich aussieht. Die
+   dunklen Werte liegen darunter bereit: data-theme am <html> entfernen.
+   Markenfarben stammen aus dem Logo: #00AAA0, #004678, #AAD2D2.
+   ---------------------------------------------------------------------- */
+:root{
+  --teal:#00AAA0;        /* hell, nur dekorativ: Linien, Marke, Flächen ohne Text */
+  --teal-deep:#00706A;   /* alles, was Text traegt */
+  --navy:#004678;
+  --mist:#AAD2D2;
+  --paper:#F1F6F6;
+  --card:#FFFFFF;
+  --ink:#0C2733;
+  --muted:#4E6B78;
+  --line:rgba(12,39,51,.14);
+  --on-dark:#FFFFFF;
+  --r:10px;
+  --maxw:1220px;
+  --pad:clamp(20px,5vw,64px);
+}
+:root[data-theme="dark"]{
+  --paper:#08191F; --card:#0E262E; --ink:#E8F0F1; --muted:#9DB4BD;
+  --line:rgba(232,240,241,.16); --navy:#7FB2D6; --teal-deep:#4FC7BD;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]){
+    --paper:#08191F; --card:#0E262E; --ink:#E8F0F1; --muted:#9DB4BD;
+    --line:rgba(232,240,241,.16); --navy:#7FB2D6; --teal-deep:#4FC7BD;
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Manrope,"Segoe UI",system-ui,sans-serif;
+  font-size:17px; line-height:1.62; letter-spacing:-.008em;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block; max-width:100%; height:auto}
+h1,h2,h3{margin:0; font-weight:800; letter-spacing:-.035em; line-height:1.08}
+p{margin:0}
+ul{margin:0; padding:0; list-style:none}
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad)}
+
+.ms{
+  font-family:"Material Symbols Outlined"; font-weight:400; font-style:normal;
+  line-height:1; letter-spacing:normal; text-transform:none; white-space:nowrap;
+  direction:ltr; font-feature-settings:'liga'; display:none;
+}
+.icons-ready .ms{display:inline-block}
+:where(a,button,input,summary):focus-visible{outline:2px solid var(--navy); outline-offset:3px}
+
+/* ---------- buttons ---------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  white-space:nowrap; padding:.9rem 1.5rem; border-radius:var(--r);
+  border:1.5px solid transparent; font:inherit; font-size:.97rem; font-weight:700;
+  text-decoration:none; cursor:pointer;
+  transition:transform .18s cubic-bezier(.16,1,.3,1), background-color .18s, color .18s, border-color .18s;
+}
+.btn-primary{background:var(--navy); color:#fff}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0) scale(.985)}
+.btn-line{border-color:var(--navy); color:var(--navy); background:transparent}
+.btn-line:hover{background:var(--navy); color:#fff; transform:translateY(-2px)}
+.btn-line:active{transform:translateY(0) scale(.985)}
+.btn-wa{background:var(--teal-deep); color:#fff}
+.btn-wa:hover{transform:translateY(-2px)}
+.btn-wa:active{transform:translateY(0) scale(.985)}
+:root[data-theme="dark"] .btn-primary,:root[data-theme="dark"] .btn-wa{color:#06171D}
+
+/* ---------- header ----------------------------------------------------- */
+.hdr{
+  position:sticky; top:0; z-index:40; min-height:66px; display:flex; align-items:center;
+  background:color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+@supports not (backdrop-filter:blur(2px)){ .hdr{background:var(--paper)} }
+.hdr .wrap{display:flex; align-items:center; gap:1.4rem; width:100%}
+.brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--navy)}
+.brand img{width:34px; height:auto}
+.brand b{font-size:1.06rem; font-weight:800; letter-spacing:.2em}
+.nav{display:flex; gap:1.7rem; margin-left:auto; font-size:.92rem; font-weight:600}
+.nav a{text-decoration:none; color:var(--muted); transition:color .18s}
+.nav a:hover{color:var(--navy)}
+.hdr .tel{
+  display:inline-flex; align-items:center; gap:.45rem; text-decoration:none;
+  font-weight:700; font-size:.92rem; padding:.55rem 1rem; color:var(--navy);
+  border:1.5px solid var(--line); border-radius:var(--r); transition:border-color .18s;
+}
+.hdr .tel:hover{border-color:var(--navy)}
+.hdr .tel .ms{font-size:18px}
+@media (max-width:900px){ .nav{display:none} .hdr .tel{margin-left:auto} }
+
+/* ---------- hero: Fotoband, Typo darunter im Farbfeld ------------------ */
+.hero-media{aspect-ratio:3/2; overflow:hidden; background:var(--mist)}
+.hero-media img{width:100%; height:100%; object-fit:cover; object-position:62% center}
+@media (min-width:760px){ .hero-media{aspect-ratio:1800/546} }
+.hero-copy{padding-block:clamp(30px,6vw,56px) clamp(34px,7vw,64px)}
+.hero h1{font-size:clamp(2.05rem,6.6vw,3.6rem); max-width:16ch}
+.hero .lede{margin-top:1.1rem; color:var(--muted); font-size:clamp(1.02rem,2.3vw,1.2rem); max-width:44ch}
+.hero-cta{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.9rem}
+@media (min-width:920px){
+  .hero-copy .wrap{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2.5rem; align-items:end}
+  .hero-cta{margin-top:0}
+}
+
+/* ---------- Abschnitte -------------------------------------------------- */
+.sec{padding-block:clamp(52px,8vw,96px)}
+.sec-head h2{font-size:clamp(1.65rem,4.4vw,2.5rem)}
+.sec-head p{margin-top:.95rem; color:var(--muted); max-width:58ch}
+
+/* ---------- Freiflaeche: Angebot links, Formular rechts ---------------- */
+.offer{display:grid; gap:clamp(26px,4vw,48px)}
+@media (min-width:960px){ .offer{grid-template-columns:minmax(0,44fr) minmax(0,56fr); align-items:start} }
+.big-num{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; margin-top:1.6rem;
+  font-size:clamp(2.4rem,7vw,3.4rem); font-weight:800; letter-spacing:-.04em; color:var(--teal-deep);
+}
+.big-num b{font-weight:800; white-space:nowrap}
+.big-num span{font-size:1rem; font-weight:600; color:var(--muted); letter-spacing:0; line-height:1.4}
+.note{
+  margin-top:1.6rem; padding:1.1rem 1.25rem; border-left:3px solid var(--teal);
+  background:var(--card); border-radius:0 var(--r) var(--r) 0; color:var(--muted); font-size:.95rem;
+}
+.form-card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:clamp(22px,4vw,34px)}
+.form-card h3{font-size:1.24rem}
+.form-card > p{margin-top:.6rem; color:var(--muted); font-size:.95rem}
+form{margin-top:1.5rem; display:grid; gap:1.05rem}
+.grid3{display:grid; gap:1.05rem}
+@media (min-width:520px){ .grid3{grid-template-columns:repeat(3,1fr)} }
+.field{display:grid; gap:.4rem}
+.field label{font-size:.85rem; font-weight:700}
+.unit{position:relative; display:block}
+.unit input{padding-right:2.4rem}
+.unit::after{
+  content:"m"; position:absolute; right:.9rem; top:50%; transform:translateY(-50%);
+  color:var(--muted); font-size:.9rem; font-weight:600; pointer-events:none;
+}
+.field input{
+  font:inherit; font-size:1rem; width:100%; padding:.78rem .9rem;
+  border:1.5px solid var(--line); border-radius:var(--r);
+  background:var(--paper); color:var(--ink); transition:border-color .18s;
+}
+.field input:focus{border-color:var(--navy)}
+.field .help{font-size:.8rem; color:var(--muted)}
+.field .err{font-size:.8rem; font-weight:600; color:#B4231C; display:none}
+:root[data-theme="dark"] .field .err{color:#FF9E96}
+.field.invalid input{border-color:#B4231C}
+.field.invalid .err{display:block}
+.field.invalid .help{display:none}
+.actions{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:.3rem}
+.actions .btn{flex:1 1 auto}
+.form-foot{font-size:.82rem; color:var(--muted)}
+
+/* ---------- Humidor: eigenes Farbfeld ---------------------------------- */
+.humidor{background:var(--teal-deep); color:var(--on-dark)}
+:root[data-theme="dark"] .humidor{background:#0A3A38}
+.humidor .sec-head p, .humidor p{color:rgba(255,255,255,.88)}
+.humidor h2{font-size:clamp(1.65rem,4.4vw,2.5rem)}
+.humidor .kicker{font-size:.84rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mist); margin-bottom:.8rem}
+.hum-grid{display:grid; gap:clamp(22px,3.5vw,44px); margin-top:1.6rem}
+@media (min-width:880px){ .hum-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.hum-fact{
+  display:inline-flex; align-items:baseline; gap:.55rem; margin-top:1.3rem;
+  padding:.75rem 1.1rem; border:1.5px solid rgba(255,255,255,.4); border-radius:var(--r);
+  font-size:1.6rem; font-weight:800; letter-spacing:-.03em;
+}
+.hum-fact span{font-size:.9rem; font-weight:600; letter-spacing:0; color:rgba(255,255,255,.85)}
+.humidor a.inline{color:#fff; font-weight:700; text-underline-offset:4px}
+
+/* ---------- Leistungen: 4 Karten, Reparaturen breiter ------------------ */
+.cards{display:grid; gap:14px; margin-top:clamp(26px,4vw,42px); grid-template-columns:1fr}
+@media (min-width:720px){ .cards{grid-template-columns:repeat(6,1fr)} }
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:clamp(20px,3vw,28px); display:flex; flex-direction:column; gap:.6rem;
+}
+.card .ms{font-size:26px; color:var(--teal-deep); margin-bottom:.2rem}
+.card h3{font-size:1.14rem}
+.card p{color:var(--muted); font-size:.95rem}
+.card ul{margin-top:.5rem; display:grid; gap:.42rem}
+.card li{color:var(--muted); font-size:.93rem; padding-left:1.1rem; position:relative}
+.card li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:6px; background:var(--teal); border-radius:50%}
+@media (min-width:720px){
+  .k1{grid-column:span 2} .k2{grid-column:span 2} .k3{grid-column:span 2}
+  .k4{grid-column:span 6}
+  .k4 ul{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:1000px){ .k4 ul{grid-template-columns:repeat(4,1fr)} }
+.motors{margin-top:1.4rem; color:var(--muted); font-size:.95rem; max-width:62ch}
+
+/* ---------- Macher: Fotoband + Text ------------------------------------ */
+.macher-media{aspect-ratio:4/3; overflow:hidden; background:var(--mist)}
+.macher-media img{width:100%; height:100%; object-fit:cover; object-position:center 32%}
+@media (min-width:760px){ .macher-media{aspect-ratio:2000/804} }
+.macher-copy{padding-block:clamp(40px,6vw,72px)}
+.macher-copy h2{font-size:clamp(1.65rem,4.4vw,2.5rem)}
+.macher-copy .cols{display:grid; gap:1.6rem; margin-top:1.3rem}
+@media (min-width:880px){ .macher-copy .cols{grid-template-columns:repeat(2,1fr); gap:2.6rem} }
+.macher-copy p{color:var(--muted)}
+.macher-copy ul{margin-top:1rem; display:grid; gap:.55rem}
+.macher-copy li{color:var(--muted); font-size:.96rem; padding-left:1.1rem; position:relative}
+.macher-copy li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:6px; background:var(--teal); border-radius:50%}
+
+/* ---------- Kontakt: genau ein Block ----------------------------------- */
+.kontakt{background:var(--navy); color:var(--on-dark)}
+:root[data-theme="dark"] .kontakt{background:#06304F}
+.kontakt h2{font-size:clamp(1.65rem,4.4vw,2.5rem)}
+.k-grid{display:grid; gap:clamp(26px,4vw,52px); margin-top:1.8rem}
+@media (min-width:880px){ .k-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} }
+.dial{
+  display:inline-flex; align-items:center; gap:.65rem; text-decoration:none; color:#fff;
+  font-size:clamp(1.5rem,5.2vw,2rem); font-weight:800; letter-spacing:-.03em;
+}
+.dial:hover{text-decoration:underline; text-underline-offset:6px}
+.k-list{margin-top:1.7rem; display:grid; gap:1.05rem}
+.k-row{display:flex; gap:.85rem; align-items:flex-start; color:rgba(255,255,255,.85); font-size:.99rem}
+.k-row .ms{font-size:20px; color:var(--mist); flex:none; margin-top:.18rem}
+.k-row strong{display:block; color:#fff; font-weight:700}
+.k-row a{color:inherit}
+.k-cta{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.9rem}
+.kontakt .btn-line{border-color:rgba(255,255,255,.65); color:#fff}
+.kontakt .btn-line:hover{background:#fff; color:var(--navy)}
+.kontakt .btn-primary{background:#fff; color:var(--navy)}
+
+/* ---------- Footer + Impressum ----------------------------------------- */
+.ft{padding-block:clamp(32px,4.5vw,52px); font-size:.9rem}
+.ft-top{display:flex; flex-wrap:wrap; gap:1.2rem 2rem; align-items:center; justify-content:space-between}
+.ft-top .brand{color:var(--navy)}
+.ft-nav{display:flex; flex-wrap:wrap; gap:1.2rem}
+.ft-nav a{color:var(--muted); text-decoration:none}
+.ft-nav a:hover{color:var(--navy)}
+details{margin-top:1.8rem; border-top:1px solid var(--line); padding-top:1.2rem}
+summary{cursor:pointer; font-weight:700; color:var(--ink); list-style:none; display:flex; align-items:center; gap:.5rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; margin-left:auto; font-weight:700; color:var(--muted)}
+details[open] summary::after{content:"\2212"}
+.imp{margin-top:1.1rem; display:grid; gap:.5rem; color:var(--muted); font-size:.87rem; max-width:80ch}
+.imp b{color:var(--ink); font-weight:700}
+.ft-note{margin-top:1.6rem; color:var(--muted); font-size:.82rem}
+
+@media (prefers-reduced-motion:no-preference){
+  .rv{opacity:0; transform:translateY(20px); transition:opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1; transform:none}
+}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none !important; transition:none !important} }
+</style>
+</head>
+
+<body>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="AySail Yachtservice, Startseite">
+      <img src="img/aysail-mark.webp" alt="" width="312" height="303">
+      <b>AYSAIL</b>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#freiplatz">Winterlager</a>
+      <a href="#humidor">Humidor</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="tel" href="tel:+436606767400"><span class="ms" aria-hidden="true">call</span>+43 660 6767400</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-media">
+      <img src="img/werkstatt-hero.webp" alt="Werkstatt von AySail: zwei Bootsbauer arbeiten am Rumpf eines Segelboots" width="1800" height="546" fetchpriority="high">
+    </div>
+    <div class="hero-copy">
+      <div class="wrap">
+        <div>
+          <h1>Ihre Werkstatt am Attersee</h1>
+          <p class="lede">Service, Reparatur und Wartung für Segelboote, ebenso für Elektro- und Motorboote.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#freiplatz">Freiplatz anfragen</a>
+          <a class="btn btn-line" href="#leistungen">Leistungen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Das aktuelle Angebot steht vorn: die Freifläche, die es wirklich gibt. -->
+  <section class="sec" id="freiplatz">
+    <div class="wrap offer">
+      <div class="rv">
+        <div class="sec-head">
+          <h2>Winterlager auf der Freifläche</h2>
+          <p>Direkt vor unserer Werkstatt in Seewalchen steht Ihr Boot auf unserer eigenen Fläche, mit Service zur Einlagerung.</p>
+        </div>
+        <p class="big-num"><b>1.000 m²</b><span>Freifläche vor der Werkstatt</span></p>
+        <p class="note">
+          Mit der Wintersaison 2026/2027 bieten wir keine Hallenplätze mehr an.
+          Auf Wunsch nennen wir Ihnen gerne Anbieter in der Region, bei denen Sie
+          einen Hallenplatz direkt anmieten können.
+        </p>
+      </div>
+
+      <div class="form-card rv">
+        <h3>Bootsdaten senden</h3>
+        <p>Länge, Breite, Höhe und Bootstyp genügen. Wir melden uns umgehend mit einem Angebot.</p>
+
+        <form id="anfrage" novalidate>
+          <div class="grid3">
+            <div class="field" id="f-laenge">
+              <label for="laenge">Länge</label>
+              <span class="unit"><input id="laenge" name="laenge" type="text" inputmode="decimal" autocomplete="off"></span>
+              <span class="err" role="alert">Bitte die Länge angeben</span>
+            </div>
+            <div class="field" id="f-breite">
+              <label for="breite">Breite</label>
+              <span class="unit"><input id="breite" name="breite" type="text" inputmode="decimal" autocomplete="off"></span>
+              <span class="err" role="alert">Bitte die Breite angeben</span>
+            </div>
+            <div class="field" id="f-hoehe">
+              <label for="hoehe">Höhe</label>
+              <span class="unit"><input id="hoehe" name="hoehe" type="text" inputmode="decimal" autocomplete="off"></span>
+              <span class="err" role="alert">Bitte die Höhe angeben</span>
+            </div>
+          </div>
+
+          <div class="field" id="f-typ">
+            <label for="typ">Bootstyp</label>
+            <input id="typ" name="typ" type="text" autocomplete="off">
+            <span class="help">zum Beispiel Segelboot, Motorboot oder Elektroboot</span>
+            <span class="err" role="alert">Bitte den Bootstyp angeben</span>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-wa" type="button" data-send="wa">
+              <span class="ms" aria-hidden="true">chat</span>Per WhatsApp senden
+            </button>
+            <button class="btn btn-primary" type="button" data-send="mail">
+              <span class="ms" aria-hidden="true">mail</span>Per E-Mail senden
+            </button>
+          </div>
+          <p class="form-foot">Die Angaben werden in Ihrer WhatsApp- oder E-Mail-App vorausgefüllt. Sie senden die Nachricht selbst ab.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Humidor: eigenes Farbfeld, klar als Konzept und nicht als Angebot. -->
+  <section class="humidor" id="humidor">
+    <div class="sec">
+      <div class="wrap">
+        <div class="rv">
+          <p class="kicker">Ein Lagerkonzept, das wir für Holzboote entwickelt haben</p>
+          <h2>Humidor für Holzboote</h2>
+        </div>
+        <div class="hum-grid">
+          <div class="rv">
+            <p>
+              Holzboote leiden im Winter unter trockener Luft. Wir haben deshalb ein
+              Einlagerungskonzept entwickelt, bei dem die Luftfeuchtigkeit konstant bei
+              60 % gehalten wird und die Halle frostsicher bleibt.
+            </p>
+            <p class="hum-fact">60 %<span>konstante Luftfeuchtigkeit</span></p>
+          </div>
+          <div class="rv">
+            <p>
+              Eigene Hallenflächen betreiben wir seit der Saison 2026/2027 nicht mehr.
+              Auf Wunsch nennen wir Ihnen gerne einen Anbieter in der Region, bei dem
+              eine Einlagerung nach diesem Konzept möglich ist. Der Mietvertrag kommt
+              dabei direkt zwischen Ihnen und dem Vermieter zustande.
+            </p>
+            <p style="margin-top:1.2rem">
+              <a class="inline" href="#kontakt">Bei Interesse melden Sie sich bei uns</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="leistungen">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Leistungen</h2>
+        <p>Wir kümmern uns vorzugsweise um Segelboote, arbeiten aber ebenso an Elektro- und Motorbooten. Unsere Leistungen betreffen Rumpf, Aufbau, Innenausbau und Ausrüstung.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card k1 rv">
+          <span class="ms" aria-hidden="true">warehouse</span>
+          <h3>Winterlager</h3>
+          <p>Freiflächen und Service zur Einlagerung.</p>
+        </div>
+        <div class="card k2 rv">
+          <span class="ms" aria-hidden="true">sailing</span>
+          <h3>Rigging</h3>
+          <p>Rigg und Ausrüstung prüfen, warten und instand setzen.</p>
+        </div>
+        <div class="card k3 rv">
+          <span class="ms" aria-hidden="true">handyman</span>
+          <h3>Restaurierung</h3>
+          <p>Rumpf, Aufbau und Innenausbau wieder in Form bringen.</p>
+        </div>
+        <div class="card k4 rv">
+          <span class="ms" aria-hidden="true">build</span>
+          <h3>Reparaturen aller Art</h3>
+          <ul>
+            <li>Antifouling und Grundierung</li>
+            <li>Beseitigung von Osmoseschäden</li>
+            <li>Reparatur von Gelcoatschäden</li>
+            <li>Holzarbeiten</li>
+            <li>Leinen- und Winschenservice</li>
+            <li>Polieren</li>
+            <li>Reinigung</li>
+            <li>und vieles mehr</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="motors rv">
+        Arbeiten an Motoren und Antrieben führen wir nicht durch. Hierfür verweisen
+        wir Sie gerne an spezialisierte Betriebe in der Region.
+      </p>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="macher-media">
+      <img src="img/zwei-macher.webp" alt="Die beiden Bootsbauer von AySail in der Werkstatt vor einem Segelbootrumpf" width="1600" height="643" loading="lazy">
+    </div>
+    <div class="macher-copy">
+      <div class="wrap">
+        <h2 class="rv">Zwei Macher</h2>
+        <div class="cols">
+          <div class="rv">
+            <p>
+              Aus Liebe zum Wasser- und Segelsport hat das AySail-Team nur ein Ziel:
+              qualitativ hochwertiges Service für Bootsbesitzer anzubieten. Dabei sind
+              Erreichbarkeit, Transparenz und Verlässlichkeit bei all unseren
+              Dienstleistungen selbstverständlich.
+            </p>
+            <p style="margin-top:1rem">
+              Wir haben unsere Leidenschaft zum Beruf gemacht. Sie und Ihr Boot stehen
+              im Mittelpunkt all unseres Tuns.
+            </p>
+          </div>
+          <div class="rv">
+            <ul>
+              <li>Als begeisterte Wassersportler können wir Kundenbedürfnisse bestens nachvollziehen.</li>
+              <li>Wir finden mit Hilfe unseres Netzwerkes zeitnah und kosteneffektiv Lösungen für alle Herausforderungen.</li>
+              <li>Wir unterstützen Sie beim An- und Verkauf Ihres Bootes.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ein einziger Kontaktblock statt drei gleicher Kästen. -->
+  <section class="kontakt" id="kontakt">
+    <div class="sec">
+      <div class="wrap">
+        <h2 class="rv">Kontakt</h2>
+        <div class="k-grid">
+          <div class="rv">
+            <a class="dial" href="tel:+436606767400"><span class="ms" aria-hidden="true">call</span>+43 660 6767400</a>
+            <div class="k-list">
+              <p class="k-row"><span class="ms" aria-hidden="true">mail</span><span><strong>E-Mail</strong>
+                <a href="mailto:bernhard.strauch@aysail.at">bernhard.strauch@aysail.at</a><br>
+                <a href="mailto:richard.hauck@aysail.at">richard.hauck@aysail.at</a></span></p>
+              <p class="k-row"><span class="ms" aria-hidden="true">place</span><span><strong>Werkstatt</strong>
+                Industriegebiet 6<br>4863 Seewalchen am Attersee</span></p>
+            </div>
+          </div>
+          <div class="rv">
+            <p style="color:rgba(255,255,255,.85)">
+              Für sämtliche Fragen und Auskünfte stehen wir Ihnen gerne zur Verfügung.
+              Am schnellsten geht es mit den Bootsdaten direkt über das Formular.
+            </p>
+            <div class="k-cta">
+              <a class="btn btn-primary" href="#freiplatz">Freiplatz anfragen</a>
+              <a class="btn btn-line" href="https://maps.google.com/maps?daddr=Industriegebiet%206%204863%20Seewalchen%20am%20Attersee" target="_blank" rel="noopener">Route planen</a>
+              <a class="btn btn-line" href="https://www.instagram.com/aysail.yachtservice/" target="_blank" rel="noopener">Instagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <span class="brand"><img src="img/aysail-mark.webp" alt="" width="312" height="303"><b>AYSAIL</b></span>
+      <nav class="ft-nav" aria-label="Fußzeile">
+        <a href="#freiplatz">Winterlager</a>
+        <a href="#humidor">Humidor</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+
+    <!-- Impressum eingeklappt statt als Textwand. Sitzadresse, Firmenbuchnummer
+         und UID beim Aufbau aus dem bestehenden Impressum übernehmen. -->
+    <details>
+      <summary>Impressum und Offenlegung</summary>
+      <div class="imp">
+        <p>Angaben nach § 5 ECG, § 14 UGB und § 25 Mediengesetz</p>
+        <p><b>AySail GmbH</b>, Yachtservice am Attersee</p>
+        <p>Wirtschaftsstandort: Industriegebiet 6, 4863 Seewalchen am Attersee</p>
+        <p>Telefon: +43 660 6767400 &nbsp; E-Mail: bernhard.strauch@aysail.at</p>
+        <p>Geschäftsführer: Bernhard Strauch</p>
+        <p>Firmenbuchgericht: Landesgericht Wels</p>
+        <p>Unternehmensgegenstand: Service, Reparatur, Wartung und Betreuung von Booten sowie Handel mit Booten und Zubehör</p>
+        <p>Gewerbebehörde: Bezirkshauptmannschaft Vöcklabruck</p>
+        <p>Mitgliedschaft: Wirtschaftskammer Oberösterreich, Fachgruppe Gewerbe und Handwerk</p>
+        <p>Anwendbare Rechtsvorschrift: Gewerbeordnung 1994, abrufbar unter www.ris.bka.gv.at</p>
+        <p>Medieninhaber und Herausgeber: AySail GmbH</p>
+      </div>
+    </details>
+
+    <p class="ft-note">Unverbindlicher Redesign-Entwurf für die AySail GmbH. Alle Texte, Fotos und Angaben stammen von aysail.at.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (!document.fonts || !document.fonts.load) return;
+  document.fonts.load('24px "Material Symbols Outlined"', 'call').then(function(){
+    var ok = false;
+    document.fonts.forEach(function(f){
+      if (f.family.indexOf('Material Symbols') > -1 && f.status === 'loaded') ok = true;
+    });
+    if (ok) document.documentElement.classList.add('icons-ready');
+  }).catch(function(){});
+})();
+
+/* Anfrage: baut aus den vier Feldern eine fertige Nachricht und uebergibt sie
+   an WhatsApp oder die Mail-App. Was die Seite heute in Worten verlangt. */
+(function(){
+  var form = document.getElementById('anfrage');
+  if (!form) return;
+  var FIELDS = [
+    {id:'laenge', box:'f-laenge', label:'Länge', unit:' m'},
+    {id:'breite', box:'f-breite', label:'Breite', unit:' m'},
+    {id:'hoehe',  box:'f-hoehe',  label:'Höhe',  unit:' m'},
+    {id:'typ',    box:'f-typ',    label:'Bootstyp', unit:''}
+  ];
+
+  FIELDS.forEach(function(f){
+    document.getElementById(f.id).addEventListener('input', function(){
+      document.getElementById(f.box).classList.remove('invalid');
+    });
+  });
+
+  function collect(){
+    var vals = {}, firstBad = null;
+    FIELDS.forEach(function(f){
+      var el = document.getElementById(f.id);
+      var v = el.value.trim();
+      var box = document.getElementById(f.box);
+      if (!v){
+        box.classList.add('invalid');
+        if (!firstBad) firstBad = el;
+      } else {
+        box.classList.remove('invalid');
+        vals[f.id] = v;
+      }
+    });
+    if (firstBad){ firstBad.focus(); return null; }
+    return vals;
+  }
+
+  function message(v){
+    return 'Anfrage Freiplatz Winterlager\n\n'
+         + 'Länge: ' + v.laenge + ' m\n'
+         + 'Breite: ' + v.breite + ' m\n'
+         + 'Höhe: ' + v.hoehe + ' m\n'
+         + 'Bootstyp: ' + v.typ + '\n';
+  }
+
+  form.querySelectorAll('[data-send]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = collect();
+      if (!v) return;
+      var body = message(v);
+      if (btn.dataset.send === 'wa'){
+        window.open('https://wa.me/436606767400?text=' + encodeURIComponent(body), '_blank', 'noopener');
+      } else {
+        window.location.href = 'mailto:bernhard.strauch@aysail.at'
+          + '?subject=' + encodeURIComponent('Anfrage Freiplatz Winterlager')
+          + '&body=' + encodeURIComponent(body);
+      }
+    });
+  });
+})();
+
+(function(){
+  var items = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+  items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
