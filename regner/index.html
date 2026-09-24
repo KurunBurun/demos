@@ -137,6 +137,8 @@ p:last-child{margin-bottom:0}
 
 nav.mainnav{border-bottom:1px solid var(--line);background:var(--paper);overflow-x:auto;-webkit-overflow-scrolling:touch}
 nav.mainnav ul{display:flex;gap:6px;list-style:none;margin:0;max-width:var(--wrap);margin-inline:auto;padding:0 calc(var(--gut) - 10px)}
+/* This nav scrolls sideways on purpose, so its items must not shrink. */
+nav.mainnav li{flex:none}
 nav.mainnav a{display:block;padding:12px 10px;text-decoration:none;white-space:nowrap;font-size:.88rem;font-weight:600;color:var(--ink-2);border-bottom:2px solid transparent}
 nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-color:var(--red)}
 
@@ -263,9 +265,9 @@ nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-c
 .dl dd a:hover{color:var(--red)}
 @media(max-width:460px){.dl div{grid-template-columns:1fr}}
 
-.hours{margin:0;width:100%;border-collapse:collapse;font-size:1rem}
+.hours{margin:0;width:100%;table-layout:fixed;border-collapse:collapse;font-size:1rem}
 .hours th,.hours td{text-align:left;padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.hours th{font-weight:600;white-space:nowrap;padding-right:16px}
+.hours th{font-weight:600;padding-right:16px}
 .hours td{color:var(--ink-2)}
 
 .mapbox{margin-top:26px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--sand-2)}
@@ -293,6 +295,29 @@ nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-c
 .skip:focus{position:static;display:block;background:var(--red);color:#fff;padding:10px var(--gut)}
 @media print{.draft,nav.mainnav,.mapbox{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ---------- mobile safety net, identical in every demo -----------------
+   Checked at 320, 360, 390 and 414. The test is that the right edge of
+   every element stays inside the viewport. A missing horizontal scrollbar
+   proves nothing: an ancestor with overflow:hidden turns overflow into a
+   silent crop, which is what cut this text off mid-word.
+
+   min-width on a flex or grid item defaults to auto, so the item refuses
+   to shrink below its content's min-content width. One long unbreakable
+   string - an email address, a URL, a long compound word - then becomes a
+   hard floor for its whole column and pushes the page past the viewport.
+   :where() holds specificity at 0, so every rule above still wins, and on
+   an ordinary block box min-width:auto already computes to 0: this changes
+   flex and grid items only. Anything that must keep its size still says
+   flex:none.
+   ---------------------------------------------------------------------- */
+:where(body *){min-width:0}
+:where(p,h1,h2,h3,h4,h5,h6,li,dt,dd,a,span,strong,em,b,small,blockquote,
+       figcaption,label,td,th,summary,button){overflow-wrap:break-word}
+:where(img,svg,video,canvas,iframe){max-width:100%}
+/* A button label wraps rather than pushing the page sideways. nowrap above
+   is right at normal text size and overflows at a phone's larger setting. */
+.btn,button{max-width:100%; white-space:normal}
 </style>
 </head>
 <body>

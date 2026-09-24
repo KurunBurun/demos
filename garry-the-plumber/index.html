@@ -10,7 +10,7 @@
 <!--
   ===========================================================================
   REDESIGN DRAFT. This is not the Garry The Plumber website.
-  An unsolicited proposal. No engagement, not for publication.
+  A non-binding proposal. No engagement, not for publication.
 
   CONTENT
   Every sentence, service, bullet and suburb on this page is copied from
@@ -155,8 +155,10 @@ ul,ol{margin:0; padding:0; list-style:none}
 }
 
 /* ---------- hero ------------------------------------------------------- */
-.hero{position:relative; background:var(--navy-darkest); border-radius:0 0 28px 28px; overflow:hidden}
-.hero-bg{position:absolute; inset:0}
+.hero{position:relative; background:var(--navy-darkest); border-radius:0 0 28px 28px}
+/* The clip belongs to the photo, not to the section: on .hero it also
+   cropped hero content silently. */
+.hero-bg{position:absolute; inset:0; border-radius:inherit; overflow:hidden}
 .hero-bg img{width:100%; height:100%; object-fit:cover; object-position:56% 42%}
 .hero-bg::after{
   content:""; position:absolute; inset:0;
@@ -346,6 +348,29 @@ ul,ol{margin:0; padding:0; list-style:none}
   .rv.in{opacity:1; transform:none}
 }
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important; transition:none!important} }
+
+/* ---------- mobile safety net, identical in every demo -----------------
+   Checked at 320, 360, 390 and 414. The test is that the right edge of
+   every element stays inside the viewport. A missing horizontal scrollbar
+   proves nothing: an ancestor with overflow:hidden turns overflow into a
+   silent crop, which is what cut this text off mid-word.
+
+   min-width on a flex or grid item defaults to auto, so the item refuses
+   to shrink below its content's min-content width. One long unbreakable
+   string - an email address, a URL, a long compound word - then becomes a
+   hard floor for its whole column and pushes the page past the viewport.
+   :where() holds specificity at 0, so every rule above still wins, and on
+   an ordinary block box min-width:auto already computes to 0: this changes
+   flex and grid items only. Anything that must keep its size still says
+   flex:none.
+   ---------------------------------------------------------------------- */
+:where(body *){min-width:0}
+:where(p,h1,h2,h3,h4,h5,h6,li,dt,dd,a,span,strong,em,b,small,blockquote,
+       figcaption,label,td,th,summary,button){overflow-wrap:break-word}
+:where(img,svg,video,canvas,iframe){max-width:100%}
+/* A button label wraps rather than pushing the page sideways. nowrap above
+   is right at normal text size and overflows at a phone's larger setting. */
+.btn,button{max-width:100%; white-space:normal}
 </style>
 </head>
 <body>
@@ -766,7 +791,7 @@ ul,ol{margin:0; padding:0; list-style:none}
       <span>&copy; <span id="yr">2026</span> GARRY THE PLUMBER. 125 Kangaroo Rd, Oakleigh VIC 3166.</span>
       <span>Ashburton &middot; Hughesdale &middot; Camberwell &middot; Malvern &middot; Glen Iris &middot; Oakleigh</span>
     </div>
-    <p class="ft-note">Unsolicited redesign draft for Garry The Plumber. Every sentence, service and suburb on this page is copied from garrytheplumber.net.au. All photographs are the business&rsquo;s own.</p>
+    <p class="ft-note">Non-binding redesign draft for Garry The Plumber. Every sentence, service and suburb on this page is copied from garrytheplumber.net.au. All photographs are the business&rsquo;s own.</p>
   </div>
 </footer>
 

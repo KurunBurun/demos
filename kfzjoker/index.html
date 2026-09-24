@@ -142,7 +142,6 @@ body{
   font-size:var(--step-body);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -493,6 +492,29 @@ a{color:inherit}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}
   .ch:hover{transform:none}
 }
+
+/* ---------- mobile safety net, identical in every demo -----------------
+   Checked at 320, 360, 390 and 414. The test is that the right edge of
+   every element stays inside the viewport. A missing horizontal scrollbar
+   proves nothing: an ancestor with overflow:hidden turns overflow into a
+   silent crop, which is what cut this text off mid-word.
+
+   min-width on a flex or grid item defaults to auto, so the item refuses
+   to shrink below its content's min-content width. One long unbreakable
+   string - an email address, a URL, a long compound word - then becomes a
+   hard floor for its whole column and pushes the page past the viewport.
+   :where() holds specificity at 0, so every rule above still wins, and on
+   an ordinary block box min-width:auto already computes to 0: this changes
+   flex and grid items only. Anything that must keep its size still says
+   flex:none.
+   ---------------------------------------------------------------------- */
+:where(body *){min-width:0}
+:where(p,h1,h2,h3,h4,h5,h6,li,dt,dd,a,span,strong,em,b,small,blockquote,
+       figcaption,label,td,th,summary,button){overflow-wrap:break-word}
+:where(img,svg,video,canvas,iframe){max-width:100%}
+/* A button label wraps rather than pushing the page sideways. nowrap above
+   is right at normal text size and overflows at a phone's larger setting. */
+.btn,button{max-width:100%; white-space:normal}
 </style>
 </head>
 
