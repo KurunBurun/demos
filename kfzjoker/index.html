@@ -52,13 +52,12 @@
 
   ENTFERNT, NICHT ERSETZT
   Auf der Seite steht nichts, das sich als vorläufig ausweist: kein
-  Logo-Platz in Kopf- und Fußzeile, kein Bildplatz, kein Hinweis, dass
-  die Leistungsliste unvollständig ist. Wer echte Werte liefern kann:
-  der Betrieb (Logo-Datei, Werkstattfotos, eigene Leistungsliste).
-  Die Google-Bewertung (4,8 aus 135) steht nicht auf der Seite:
-  Verzeichnisdaten sind keine Daten des Betriebs, und die Zahl ändert sich.
-  Die vier Leistungen stammen aus Branchenverzeichnissen, nicht vom
-  Betrieb selbst.
+  Logo-Platz, kein Bildplatz, kein Hinweis auf Unvollständiges.
+  Ebenfalls entfernt: die Leistungsliste und die Google-Bewertung.
+  Beide stammten aus Verzeichnissen (cylex, wheree, tupalo, Google),
+  nicht vom Betrieb. Die Website des Betriebs hat keinen eigenen
+  Inhalt; nach den Regeln des Pipelines ist das ein Ausschlussgrund
+  für den Lead, kein Anlass, die Lücke aus Verzeichnissen zu füllen.
 
   QUELLENVERMERKE
   Woher ein Datum stammt und wie gut es belegt ist, steht in audit.md.
@@ -292,53 +291,13 @@ a{color:inherit}
 }
 
 /* ============================================================
-   2  LEISTUNGEN  |  Raster mit exakt 5 Feldern
+   2  SEKTIONEN
    ============================================================ */
 .sec{padding:clamp(4.5rem,10vw,8rem) 0}
 .sec-tight{padding:clamp(1.5rem,3vw,2.5rem) 0}
 .sec-head{margin-bottom:clamp(2.2rem,4.5vw,3.4rem);max-width:60ch}
 .sec-head .lede{margin-top:1.1rem}
 
-.grid-svc{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.tile{
-  border:1px solid var(--line);
-  background:var(--ink-2);
-  padding:clamp(1.5rem,2.6vw,2.1rem);
-  border-radius:var(--radius);
-  display:flex;flex-direction:column;gap:.7rem;
-  min-height:clamp(170px,17vw,210px);
-  transition:border-color .3s var(--ease),background .3s var(--ease);
-}
-.tile:hover{border-color:#3a3a40;background:var(--ink-3)}
-.tile-lead{
-  grid-column:span 7;
-  position:relative;overflow:hidden;
-  border-color:#33301f;
-  background:
-    linear-gradient(150deg,rgba(255,196,0,.09) 0%,transparent 55%),
-    var(--ink-2);
-}
-.tile-lead::before{
-  content:"";position:absolute;inset:0;
-  background-image:var(--halftone-gold);
-  background-size:11px 11px;
-  -webkit-mask-image:radial-gradient(circle at 86% 12%,#000 0%,transparent 58%);
-  mask-image:radial-gradient(circle at 86% 12%,#000 0%,transparent 58%);
-  pointer-events:none;
-}
-.tile-lead>*{position:relative;z-index:1}
-.tile-a{grid-column:span 5}
-.tile-b{grid-column:span 5}
-.tile-c{
-  grid-column:span 7;
-  background:linear-gradient(150deg,rgba(255,196,0,.05) 0%,transparent 60%),var(--ink-2);
-}
-.tile p{margin:0;color:var(--muted);font-size:.95rem}
-@media (max-width:900px){
-  .grid-svc{grid-template-columns:1fr}
-  .tile-lead,.tile-a,.tile-b,.tile-c{grid-column:1/-1}
-  .tile{min-height:auto}
-}
 
 
 
@@ -480,7 +439,6 @@ a{color:inherit}
       </span>
     </a>
     <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="#leistungen">Leistungen</a>
       <a href="#zeiten">Zeiten</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -500,41 +458,6 @@ a{color:inherit}
         <a class="btn btn-primary" href="tel:+4369911137350"><svg class="ic" aria-hidden="true"><use href="#i-call"/></svg>Anrufen</a>
       </div>
       <div class="hero-rule" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- 2 ============ LEISTUNGEN ============ -->
-  <section class="sec" id="leistungen">
-    <div class="shell">
-      <div class="sec-head rise">
-        <p class="eyebrow">Leistungen</p>
-        <h2 class="h2">Was in der Werkstatt<br>gemacht wird</h2>
-      </div>
-
-      <div class="grid-svc">
-
-        <article class="tile tile-lead rise">
-          <h3 class="h3">Kfz-Reparatur und Werkstatt</h3>
-          <p>Der Kern des Betriebs an der Laxenburger Straße. Reparatur und Service am Fahrzeug.</p>
-        </article>
-
-        <article class="tile tile-a rise">
-          <h3 class="h3">Reifen</h3>
-          <p>Reifen für Ihr Fahrzeug.</p>
-        </article>
-
-        <article class="tile tile-b rise">
-          <h3 class="h3">Pannen- und Abschleppdienst</h3>
-          <p>Wenn das Fahrzeug nicht mehr fährt.</p>
-        </article>
-
-        <article class="tile tile-c rise">
-          <h3 class="h3">Fahrzeughandel</h3>
-          <p>An- und Verkauf von Fahrzeugen.</p>
-        </article>
-
-      </div>
-
     </div>
   </section>
 
