@@ -141,7 +141,10 @@ ul,ol{margin:0; padding:0; list-style:none}
 
 /* ---------- header ----------------------------------------------------- */
 .hdr{position:sticky; top:0; z-index:50; background:var(--card); border-bottom:1px solid var(--line)}
-.hdr .wrap{display:flex; align-items:center; gap:1rem; min-height:66px}
+.hdr .wrap{display:flex; flex-wrap:wrap; align-items:center; gap:.35rem 1rem; min-height:66px}
+/* The number is nowrap, so when the row cannot hold logo and number it wraps
+   under the logo. Without the wrap, min-width:0 shrinks the link's box and the
+   digits paint past it: the box measures clean while the page overflows. */
 .brand img{height:34px; width:auto}
 .nav{display:none; gap:1.45rem; margin-left:auto; font-size:.9rem; font-weight:600}
 .nav a{color:var(--muted); text-decoration:none}
@@ -371,6 +374,14 @@ ul,ol{margin:0; padding:0; list-style:none}
 /* A button label wraps rather than pushing the page sideways. nowrap above
    is right at normal text size and overflows at a phone's larger setting. */
 .btn,button{max-width:100%; white-space:normal}
+/* Page zoom near 200% leaves about 160px of CSS viewport on a small phone:
+   there the pill padding alone pushes the longest label past the edge. */
+@media (max-width:240px){
+  .btn{padding-inline:1rem}
+  /* Bare text inside a flex li is an anonymous flex item, which min-width:0
+     on elements cannot reach: its floor is the longest word. */
+  .svc li{overflow-wrap:anywhere}
+}
 </style>
 </head>
 <body>
