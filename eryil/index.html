@@ -240,7 +240,9 @@
   .s-b { grid-column: span 5; }
   .s-c { grid-column: span 5; }
   .s-d { grid-column: span 7; }
-  @media (max-width: 900px) { .svc > * { grid-column: 1 / -1; } }
+  /* One track on phones. Twelve tracks with every card spanning them look the
+     same, but their eleven gaps alone need about 176px and push the page wide. */
+  @media (max-width: 900px) { .svc { grid-template-columns: 1fr; } .svc > * { grid-column: 1 / -1; } }
 
   /* ============ Kundenstimmen ============ */
   .quotes { columns: 3; column-gap: clamp(1rem, 2.2vw, 1.5rem); margin-top: clamp(2.5rem, 5vw, 3.5rem); }
@@ -313,10 +315,14 @@
   .foot-note { font-size: var(--step--1); color: var(--ink-3); }
 
 /* ---------- mobile safety net, identical in every demo -----------------
-   Checked at 320, 360, 390 and 414. The test is that the right edge of
-   every element stays inside the viewport. A missing horizontal scrollbar
-   proves nothing: an ancestor with overflow:hidden turns overflow into a
-   silent crop, which is what cut this text off mid-word.
+   Swept at every CSS width from 160 to 440, not at a handful of device
+   widths. A phone's page zoom shrinks the CSS viewport to device width
+   divided by the zoom, so a 375 phone at 175% lays the page out at 214px:
+   any width in that range is a real screen. The test is that no element
+   box and no text run crosses either edge of the layout viewport
+   (document.documentElement.clientWidth), with every horizontal clip
+   neutralised first. A missing scrollbar proves nothing: overflow:hidden
+   on an ancestor turns overflow into a silent crop.
 
    min-width on a flex or grid item defaults to auto, so the item refuses
    to shrink below its content's min-content width. One long unbreakable
@@ -334,6 +340,13 @@
 /* A button label wraps rather than pushing the page sideways. nowrap above
    is right at normal text size and overflows at a phone's larger setting. */
 .btn,button{max-width:100%; white-space:normal}
+/* Below 300 CSS px, which a phone reaches only through zoom, one long word
+   must not set the width of its column: break-word leaves min-content
+   alone, anywhere lowers it. Pill padding eases for the same reason. */
+@media (max-width:299px){
+  :where(body *){overflow-wrap:anywhere}
+  .btn{padding-inline:1rem}
+}
 </style>
 
 <a class="skip" href="#main">Zum Inhalt springen</a>

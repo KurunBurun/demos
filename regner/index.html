@@ -182,6 +182,10 @@ nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-c
 .prod + .prod{margin-top:20px}
 .prod-head{padding:20px 22px 0}
 .prod-head h3{display:flex;align-items:center;gap:11px}
+/* Bare text in a flex heading is an anonymous flex item that min-width:0 on
+   elements cannot reach; at a larger text setting "Sonnenschutz" set its floor.
+   The same for the uppercase role line. Breaks only when a word cannot fit. */
+.prod-head h3,.person .role,.person h4{overflow-wrap:anywhere}
 .prod-head h3 svg{color:var(--red);flex:none}
 .prod-lead{margin:12px 0 0;color:var(--ink-2);font-size:1rem}
 .prod-body{display:grid;gap:0;padding:18px 22px 22px}
@@ -297,10 +301,14 @@ nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-c
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 /* ---------- mobile safety net, identical in every demo -----------------
-   Checked at 320, 360, 390 and 414. The test is that the right edge of
-   every element stays inside the viewport. A missing horizontal scrollbar
-   proves nothing: an ancestor with overflow:hidden turns overflow into a
-   silent crop, which is what cut this text off mid-word.
+   Swept at every CSS width from 160 to 440, not at a handful of device
+   widths. A phone's page zoom shrinks the CSS viewport to device width
+   divided by the zoom, so a 375 phone at 175% lays the page out at 214px:
+   any width in that range is a real screen. The test is that no element
+   box and no text run crosses either edge of the layout viewport
+   (document.documentElement.clientWidth), with every horizontal clip
+   neutralised first. A missing scrollbar proves nothing: overflow:hidden
+   on an ancestor turns overflow into a silent crop.
 
    min-width on a flex or grid item defaults to auto, so the item refuses
    to shrink below its content's min-content width. One long unbreakable
@@ -318,6 +326,13 @@ nav.mainnav a:hover,nav.mainnav a:focus-visible{color:var(--red);border-bottom-c
 /* A button label wraps rather than pushing the page sideways. nowrap above
    is right at normal text size and overflows at a phone's larger setting. */
 .btn,button{max-width:100%; white-space:normal}
+/* Below 300 CSS px, which a phone reaches only through zoom, one long word
+   must not set the width of its column: break-word leaves min-content
+   alone, anywhere lowers it. Pill padding eases for the same reason. */
+@media (max-width:299px){
+  :where(body *){overflow-wrap:anywhere}
+  .btn{padding-inline:1rem}
+}
 </style>
 </head>
 <body>

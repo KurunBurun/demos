@@ -161,7 +161,9 @@ ul{margin:0; padding:0; list-style:none}
   display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem .7rem; margin-top:1.6rem;
   font-size:clamp(2.4rem,7vw,3.4rem); font-weight:800; letter-spacing:-.04em; color:var(--teal-deep);
 }
-.big-num b{font-weight:800; white-space:nowrap}
+/* No nowrap: at normal size the figure fits on one line anyway, and at a
+   larger text setting or zoom it may break between number and unit. */
+.big-num b{font-weight:800}
 .big-num span{font-size:1rem; font-weight:600; color:var(--muted); letter-spacing:0; line-height:1.4}
 .note{
   margin-top:1.6rem; padding:1.1rem 1.25rem; border-left:3px solid var(--teal);
@@ -211,6 +213,10 @@ form{margin-top:1.5rem; display:grid; gap:1.05rem}
   font-size:1.6rem; font-weight:800; letter-spacing:-.03em;
 }
 .hum-fact span{font-size:.9rem; font-weight:600; letter-spacing:0; color:rgba(255,255,255,.85)}
+/* At a phone's larger text setting the label drops under the figure and its
+   one long word may break; at normal size both fit on one line as before. */
+.hum-fact{flex-wrap:wrap; max-width:100%}
+.hum-fact span{overflow-wrap:anywhere}
 .humidor a.inline{color:#fff; font-weight:700; text-underline-offset:4px}
 
 /* ---------- Leistungen: 4 Karten, Reparaturen breiter ------------------ */
@@ -291,10 +297,14 @@ details[open] summary::after{content:"\2212"}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none !important; transition:none !important} }
 
 /* ---------- mobile safety net, identical in every demo -----------------
-   Checked at 320, 360, 390 and 414. The test is that the right edge of
-   every element stays inside the viewport. A missing horizontal scrollbar
-   proves nothing: an ancestor with overflow:hidden turns overflow into a
-   silent crop, which is what cut this text off mid-word.
+   Swept at every CSS width from 160 to 440, not at a handful of device
+   widths. A phone's page zoom shrinks the CSS viewport to device width
+   divided by the zoom, so a 375 phone at 175% lays the page out at 214px:
+   any width in that range is a real screen. The test is that no element
+   box and no text run crosses either edge of the layout viewport
+   (document.documentElement.clientWidth), with every horizontal clip
+   neutralised first. A missing scrollbar proves nothing: overflow:hidden
+   on an ancestor turns overflow into a silent crop.
 
    min-width on a flex or grid item defaults to auto, so the item refuses
    to shrink below its content's min-content width. One long unbreakable
@@ -312,6 +322,13 @@ details[open] summary::after{content:"\2212"}
 /* A button label wraps rather than pushing the page sideways. nowrap above
    is right at normal text size and overflows at a phone's larger setting. */
 .btn,button{max-width:100%; white-space:normal}
+/* Below 300 CSS px, which a phone reaches only through zoom, one long word
+   must not set the width of its column: break-word leaves min-content
+   alone, anywhere lowers it. Pill padding eases for the same reason. */
+@media (max-width:299px){
+  :where(body *){overflow-wrap:anywhere}
+  .btn{padding-inline:1rem}
+}
 </style>
 </head>
 

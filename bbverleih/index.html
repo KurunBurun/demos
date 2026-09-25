@@ -102,8 +102,13 @@ ul{margin:0; padding:0; list-style:none}
 
 /* ---------- header ----------------------------------------------------- */
 .hdr{position:sticky; top:0; z-index:40; background:var(--paper); border-bottom:1px solid var(--line)}
-.hdr .wrap{display:flex; align-items:center; gap:1rem; min-height:64px}
+.hdr .wrap{display:flex; flex-wrap:wrap; align-items:center; gap:.35rem 1rem; min-height:64px}
+/* The number is nowrap, so when the row cannot hold logo and number it wraps
+   under the logo. Without the wrap, min-width:0 shrinks the link's box and the
+   digits paint past it: the box measures clean while the page overflows. */
 .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); min-width:0}
+/* Basis 0: the brand gives up room before the row wraps, as it did before. */
+.hdr .brand{flex:1 1 0}
 .brand img{width:40px; height:auto}
 .brand b{font-size:1.02rem; font-weight:800; line-height:1.15}
 .brand span{display:block; font-size:.74rem; font-weight:600; color:var(--muted); letter-spacing:.02em}
@@ -117,6 +122,9 @@ ul{margin:0; padding:0; list-style:none}
   font-weight:700; font-size:.9rem; text-decoration:none; color:var(--ink);
   white-space:nowrap; flex:none}
 @media (min-width:900px){ .hdr .tel{margin-left:0} }
+/* The pill wraps to its own row first; only if it is still too wide there,
+   at a narrow viewport or large text, does the number break. */
+.hdr .tel{white-space:normal; flex:0 1 auto}
 .hdr .tel:hover{border-color:var(--ink)}
 .hdr .tel .ms{font-size:18px}
 
@@ -141,11 +149,16 @@ ul{margin:0; padding:0; list-style:none}
 @media (min-width:860px){ .fleet{grid-template-columns:repeat(2,1fr)} }
 .unit{
   background:var(--card); border:1px solid var(--line); border-radius:var(--r);
-  padding:14px; display:grid; grid-template-columns:118px minmax(0,1fr); gap:14px;
+  padding:14px; display:flex; flex-wrap:wrap; gap:14px;
   align-items:start; transition:border-color .18s;
 }
 .unit:hover{border-color:var(--orange)}
-@media (min-width:520px){ .unit{grid-template-columns:168px minmax(0,1fr); gap:18px; padding:16px} }
+/* Photo and text side by side while the text keeps at least 7em of room;
+   the basis is in em, so a larger text setting drops the text under the photo
+   on a narrow phone, where a fixed grid column would push the page wide. */
+.unit > img{flex:0 0 118px}
+.unit > div{flex:1 1 7em}
+@media (min-width:520px){ .unit{gap:18px; padding:16px} .unit > img{flex-basis:168px} }
 .unit img{width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px; background:var(--paper)}
 .unit h3{font-size:1.02rem; line-height:1.25}
 @media (min-width:520px){ .unit h3{font-size:1.12rem} }
@@ -155,6 +168,15 @@ ul{margin:0; padding:0; list-style:none}
 .spec{margin-top:.7rem; display:grid; gap:.28rem}
 .spec li{display:flex; gap:.5rem; font-size:.855rem; color:var(--muted); line-height:1.4}
 .spec b{color:var(--ink); font-weight:600; flex:none; min-width:6.4em}
+/* The value keeps a 2.2em basis beside its label and drops under it when
+   that no longer fits: every row at once, since the labels share one width.
+   From 340 up that is the old side-by-side layout; at 320, where the value
+   column was 16px and "Klasse B" broke mid-word, and at a larger text
+   setting, values sit under their labels. The label's minimum never exceeds
+   the column. */
+.spec li{flex-wrap:wrap; row-gap:0}
+.spec li > span{flex:1 1 2.2em}
+.spec b{min-width:min(6.4em,100%)}
 .unit .more{margin-top:.75rem}
 .unit summary{cursor:pointer; list-style:none; font-size:.85rem; font-weight:700;
   color:var(--orange-deep); display:inline-flex; align-items:center; gap:.25rem}
@@ -228,6 +250,10 @@ form{display:grid; gap:1rem}
 .weg img{border-radius:var(--r); border:1px solid var(--line)}
 .steps{display:grid; gap:.55rem; counter-reset:s}
 .steps li{display:flex; gap:.7rem; color:var(--muted); font-size:.95rem}
+/* Bare text beside an icon in a flex li is an anonymous flex item that
+   min-width:0 on elements cannot reach; its floor is the longest word.
+   overflow-wrap is inherited, so set on the li it reaches the text. */
+.asks li,.bullets li,.steps li{overflow-wrap:anywhere}
 .steps li::before{counter-increment:s; content:counter(s); flex:none; width:23px; height:23px;
   border-radius:50%; background:var(--orange); color:#17191C; font-size:.78rem; font-weight:800;
   display:grid; place-items:center; margin-top:.12em}
@@ -263,10 +289,14 @@ form{display:grid; gap:1rem}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important; transition:none!important} }
 
 /* ---------- mobile safety net, identical in every demo -----------------
-   Checked at 320, 360, 390 and 414. The test is that the right edge of
-   every element stays inside the viewport. A missing horizontal scrollbar
-   proves nothing: an ancestor with overflow:hidden turns overflow into a
-   silent crop, which is what cut this text off mid-word.
+   Swept at every CSS width from 160 to 440, not at a handful of device
+   widths. A phone's page zoom shrinks the CSS viewport to device width
+   divided by the zoom, so a 375 phone at 175% lays the page out at 214px:
+   any width in that range is a real screen. The test is that no element
+   box and no text run crosses either edge of the layout viewport
+   (document.documentElement.clientWidth), with every horizontal clip
+   neutralised first. A missing scrollbar proves nothing: overflow:hidden
+   on an ancestor turns overflow into a silent crop.
 
    min-width on a flex or grid item defaults to auto, so the item refuses
    to shrink below its content's min-content width. One long unbreakable
@@ -284,6 +314,13 @@ form{display:grid; gap:1rem}
 /* A button label wraps rather than pushing the page sideways. nowrap above
    is right at normal text size and overflows at a phone's larger setting. */
 .btn,button{max-width:100%; white-space:normal}
+/* Below 300 CSS px, which a phone reaches only through zoom, one long word
+   must not set the width of its column: break-word leaves min-content
+   alone, anywhere lowers it. Pill padding eases for the same reason. */
+@media (max-width:299px){
+  :where(body *){overflow-wrap:anywhere}
+  .btn{padding-inline:1rem}
+}
 </style>
 </head>
 <body>
