@@ -29,7 +29,6 @@
   - 0699 111 37 350 / 01 92 99 589           (Facebook, cylex, tupalo)
   - office@kfzjoker.at                        (Betrieb)
   - Mo-Fr 8-18, Sa 8-14                       (Betrieb)
-  - Google 4,8 aus 135 Bewertungen            (Google Business, wheree.com)
   - Logofarben Gelb / Rot / Blau, Rasterschraffur der Briefkopfzeile
 
   ZUM CLAIM
@@ -47,20 +46,19 @@
   Die Seite trägt Typografie und Zahlen, nicht Fotografie.
 
   BILDER
-  Es wurden keine Lizenzen gekauft und keine fremden Fotos verwendet.
-  Genau ein Bildplatz ist vorgesehen und sichtbar als Platzhalter
-  ausgezeichnet. Das Logo ist als Wortmarke gesetzt, der echte
-  Jokerkopf ersetzt die Marke im Kopfbereich.
+  Keine. Es wurden keine Lizenzen gekauft und keine fremden Fotos
+  verwendet. Das Logo ist als Wortmarke gesetzt; der Jokerkopf wurde
+  weder nachgezeichnet noch generiert.
 
-  PLATZHALTER, die KFZ Joker befüllt
-  1. Logo in Kopf- und Fußzeile. Der Jokerkopf mit der dreifarbigen
-     Kappe wurde weder nachgezeichnet noch generiert, der Platz ist
-     ausgewiesen und der Betrieb liefert die Datei.
-  2. Leistungen: die vier Punkte stammen aus Branchenverzeichnissen,
-     nicht vom Betrieb selbst. Die Zeile unter der Liste sagt, dass
-     sie unvollständig ist.
-  3. Werkstattfoto im Band vor den Öffnungszeiten.
-  Nichts davon wurde erfunden oder mit plausiblen Werten gefüllt.
+  ENTFERNT, NICHT ERSETZT
+  Auf der Seite steht nichts, das sich als vorläufig ausweist: kein
+  Logo-Platz in Kopf- und Fußzeile, kein Bildplatz, kein Hinweis, dass
+  die Leistungsliste unvollständig ist. Wer echte Werte liefern kann:
+  der Betrieb (Logo-Datei, Werkstattfotos, eigene Leistungsliste).
+  Die Google-Bewertung (4,8 aus 135) steht nicht auf der Seite:
+  Verzeichnisdaten sind keine Daten des Betriebs, und die Zahl ändert sich.
+  Die vier Leistungen stammen aus Branchenverzeichnissen, nicht vom
+  Betrieb selbst.
 
   QUELLENVERMERKE
   Woher ein Datum stammt und wie gut es belegt ist, steht in audit.md.
@@ -238,33 +236,6 @@ a{color:inherit}
   font-size:1.02rem;letter-spacing:.06em;text-transform:uppercase;
   font-variation-settings:'wdth' 112,'wght' 800;
 }
-.mark-note{
-  font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--muted-2);
-  font-variation-settings:'wdth' 96,'wght' 600;
-  margin-top:.18rem;
-}
-/* Ausgewiesener Logo-Platz. Bewusst leer: das Original liefert der Betrieb. */
-.logo-slot{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;
-  width:38px;height:38px;
-  border:1px dashed #45454c;
-  border-radius:var(--radius);
-  flex:none;
-}
-.logo-slot-dots{display:flex;gap:3px}
-.logo-slot-dots i{width:5px;height:5px;border-radius:50%;display:block}
-.logo-slot-dots i:nth-child(1){background:var(--mark-red)}
-.logo-slot-dots i:nth-child(2){background:var(--yellow)}
-.logo-slot-dots i:nth-child(3){background:var(--mark-blue)}
-.logo-slot-word{
-  font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);
-  font-variation-settings:'wdth' 96,'wght' 700;line-height:1;
-}
-.logo-slot-lg{width:64px;height:64px;gap:6px}
-.logo-slot-lg .logo-slot-dots i{width:8px;height:8px}
-.logo-slot-lg .logo-slot-word{font-size:.6rem}
 .nav-links{display:flex;gap:1.6rem}
 .nav-links a{
   text-decoration:none;font-size:.85rem;color:var(--muted);
@@ -290,7 +261,6 @@ a{color:inherit}
 .nav-in{flex-wrap:wrap;row-gap:.5rem;padding-block:.7rem}
 /* Basis 0: the mark gives up room before the row wraps, as it did before. */
 .nav .mark{flex:1 1 0}
-@media (max-width:520px){.mark-note{display:none}}
 
 /* ============================================================
    1  HERO  |  Plakat, kein Foto
@@ -364,49 +334,13 @@ a{color:inherit}
   background:linear-gradient(150deg,rgba(255,196,0,.05) 0%,transparent 60%),var(--ink-2);
 }
 .tile p{margin:0;color:var(--muted);font-size:.95rem}
-.svc-note{
-  margin:1.4rem 0 0;
-  color:var(--muted-2);
-  font-size:.92rem;
-}
 @media (max-width:900px){
   .grid-svc{grid-template-columns:1fr}
   .tile-lead,.tile-a,.tile-b,.tile-c{grid-column:1/-1}
   .tile{min-height:auto}
 }
 
-/* ============================================================
-   3  VERTRAUEN  |  genau ein Element, echte Google-Zahlen
-   ============================================================ */
-.trust{border-block:1px solid var(--line);background:var(--ink-2);padding:clamp(3rem,6vw,4.6rem) 0}
-.trust-in{display:flex;align-items:center;justify-content:center;gap:clamp(1.4rem,4vw,3.2rem);flex-wrap:wrap;text-align:center}
-.trust-score{font-size:clamp(4rem,11vw,7.5rem);color:var(--yellow)}
-.trust-meta{text-align:left}
-.stars{display:flex;gap:2px;color:var(--yellow);margin-bottom:.5rem}
-.stars .ic{width:20px;height:20px}
-.stars .half{opacity:.42}
-.trust-meta p{margin:0;font-size:clamp(1rem,1.6vw,1.22rem);font-variation-settings:'wdth' 104,'wght' 640}
-@media (max-width:560px){.trust-meta{text-align:center}.stars{justify-content:center}}
 
-/* ============================================================
-   4  BILDBAND  |  einziger Bildplatz, sichtbar markiert
-   ============================================================ */
-.photo-slot{
-  min-height:clamp(200px,26vw,300px);
-  border:1px dashed #3a3a40;
-  border-radius:var(--radius);
-  background-image:var(--halftone);
-  background-size:14px 14px;
-  background-color:var(--ink-2);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:.8rem;text-align:center;padding:2rem;
-}
-.photo-slot .ic{width:32px;height:32px;color:var(--muted-2)}
-.photo-slot strong{
-  font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);
-  font-variation-settings:'wdth' 98,'wght' 700;
-}
-.photo-slot p{margin:0;color:var(--muted-2);font-size:.9rem;max-width:44ch}
 
 /* ============================================================
    5  ZEITEN + ADRESSE  |  Zahlen tragen den Abschnitt
@@ -479,13 +413,6 @@ a{color:inherit}
 
 /* ---------- Fußzeile ---------- */
 .foot{border-top:1px solid var(--line-soft);padding:2.6rem 0;color:var(--muted-2);font-size:.85rem}
-.foot-logo{
-  display:flex;align-items:center;gap:1.1rem;
-  padding-bottom:1.8rem;margin-bottom:1.8rem;
-  border-bottom:1px solid var(--line-soft);
-}
-.foot-logo p{margin:0;max-width:62ch;font-size:.88rem;color:var(--muted-2)}
-@media (max-width:560px){.foot-logo{flex-direction:column;align-items:flex-start;gap:.9rem}}
 .foot-in{display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;align-items:center}
 .foot a{color:var(--muted);text-decoration:none}
 .foot a:hover{color:var(--paper)}
@@ -547,16 +474,9 @@ a{color:inherit}
 
 <header class="nav">
   <div class="nav-in">
-    <!-- Platzhalter für das Jokerkopf-Logo. Das Original liefert der Betrieb,
-         nachgezeichnet oder generiert wurde nichts. -->
     <a class="mark" href="#top" aria-label="KFZ Joker, zum Seitenanfang">
-      <span class="logo-slot" aria-hidden="true">
-        <span class="logo-slot-dots"><i></i><i></i><i></i></span>
-        <span class="logo-slot-word">Logo</span>
-      </span>
       <span class="mark-text">
         <span class="mark-name">KFZ Joker</span>
-        <span class="mark-note">Platzhalter, Original-Logo folgt</span>
       </span>
     </a>
     <nav class="nav-links" aria-label="Hauptnavigation">
@@ -615,36 +535,6 @@ a{color:inherit}
 
       </div>
 
-      <!-- 2: eine Zeile statt einer eigenen Platzhalterkarte. -->
-      <p class="svc-note rise">Die Liste ist unvollständig, die endgültigen Leistungen ergänzt der Betrieb.</p>
-    </div>
-  </section>
-
-  <!-- 3 ============ VERTRAUEN ============ -->
-  <!-- Ein einziges Vertrauenselement. Beide Zahlen stammen aus dem
-       Google-Business-Eintrag des Betriebs (4,8 aus 135 Bewertungen).
-       Keine Zitate, keine Namen, keine Portraits. -->
-  <section class="trust" aria-label="Bewertung">
-    <div class="shell trust-in rise">
-      <div class="num trust-score">4,8</div>
-      <div class="trust-meta">
-        <div class="stars" aria-hidden="true">
-          <svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic half" aria-hidden="true"><use href="#i-star"/></svg>
-        </div>
-        <p>aus 135 Google-Bewertungen</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 ============ BILDBAND ============ -->
-  <section class="sec sec-tight" aria-label="Bildplatz">
-    <div class="shell">
-      <!-- Einziger Bildplatz der Seite. Es wurden keine Lizenzen gekauft. -->
-      <div class="photo-slot rise">
-        <svg class="ic" aria-hidden="true"><use href="#i-photo"/></svg>
-        <strong>Platzhalter: Foto der Werkstatt</strong>
-        <p>Hier kommen eigene Aufnahmen von KFZ Joker hin, Halle oder Team. Es wurde bewusst kein fremdes Bild eingesetzt.</p>
-      </div>
     </div>
   </section>
 
@@ -720,16 +610,6 @@ a{color:inherit}
 </main>
 
 <footer class="foot">
-  <div class="shell">
-    <!-- Zweiter Logo-Platzhalter. Gleicher Hinweis, hier mit Platz für den ganzen Satz. -->
-    <div class="foot-logo rise">
-      <span class="logo-slot logo-slot-lg" aria-hidden="true">
-        <span class="logo-slot-dots"><i></i><i></i><i></i></span>
-        <span class="logo-slot-word">Logo</span>
-      </span>
-      <p>Platzhalter: hier steht das Original-Logo von KFZ Joker, der Jokerkopf mit der dreifarbigen Kappe. Die Datei stellt der Betrieb bereit, nachgezeichnet wurde nichts.</p>
-    </div>
-  </div>
   <div class="shell foot-in">
     <span>KFZ JOKER SENGÖNÜL OG, Laxenburger Straße 11, 1100 Wien</span>
     <span><a href="tel:+4319299589">01 92 99 589</a> &nbsp; <a href="mailto:office@kfzjoker.at">office@kfzjoker.at</a></span>

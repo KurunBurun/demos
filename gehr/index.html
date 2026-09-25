@@ -21,11 +21,11 @@
     "Elektromotore"            -> "Elektromotoren"
     Gedankenstrich in "CE Kennzeichnung" -> Bindestrich
 
-  NOCH ZU KLAEREN (bewusst NICHT erfunden, Platzhalter im Markup markiert):
+  NOCH ZU KLAEREN (bewusst NICHT erfunden und nicht auf der Seite):
     - Oeffnungszeiten
     - Impressum und Datenschutzerklaerung sind auf der bestehenden Seite
-      vorhanden. Im Entwurf stehen die Fussnoten-Links als Platzhalter und
-      werden beim Aufbau auf die bestehenden Seiten gezeigt.
+      vorhanden. Ihre Adressen sind nicht belegt, deshalb stehen im Entwurf
+      keine Links darauf statt Links, die ins Leere oder zum Kontakt fuehren.
     - Bootseinstellung: Leistung steht auf der Tafel am Tor, aber nirgends
       auf der Website. Bewusst ausgelassen, solange der Inhalt nicht bestaetigt ist.
     - Technische Daten und Preise: auf der bestehenden Website existiert dazu
@@ -276,7 +276,7 @@ form{display:grid; gap:1.05rem}
 /* ---------- Footer ----------------------------------------------------- */
 .ft{border-top:1px solid var(--line); padding-block:clamp(36px,5vw,56px); font-size:.9rem}
 .ft-grid{display:grid; gap:1.8rem}
-@media (min-width:760px){ .ft-grid{grid-template-columns:1.4fr 1fr 1fr; gap:2.5rem} }
+@media (min-width:760px){ .ft-grid{grid-template-columns:1.4fr 1fr; gap:2.5rem} }
 .ft img{height:28px; width:auto}
 .ft p{color:var(--fg-dim); margin-top:.9rem; max-width:34ch}
 .ft h4{margin:0 0 .8rem; font-size:.78rem; text-transform:uppercase; color:var(--fg); letter-spacing:.08em; font-weight:600}
@@ -477,8 +477,9 @@ form{display:grid; gap:1.05rem}
         <p class="hint" style="margin-top:1.9rem">Für sämtliche Fragen und Auskünfte stehen wir selbstverständlich gerne zur Verfügung.</p>
       </div>
 
-      <!-- Entwurf: Felder wie im Original. Ohne Backend, nichts wird gesendet. -->
-      <form class="rv" novalidate onsubmit="return false">
+      <!-- Felder wie im Original. Ohne Backend: das Formular stellt die Nachricht
+           zusammen und öffnet sie im E-Mail-Programm, adressiert an office@gehrboote.at. -->
+      <form class="rv" id="anfrage" novalidate>
         <div class="row">
           <div class="field"><label for="f-vn">Vorname</label><input id="f-vn" name="vorname" type="text" autocomplete="given-name"></div>
           <div class="field"><label for="f-nn">Nachname</label><input id="f-nn" name="nachname" type="text" autocomplete="family-name"></div>
@@ -493,7 +494,7 @@ form{display:grid; gap:1.05rem}
           <span>Ja, ich bin damit einverstanden, dass meine Daten im Zuge dieser Anfrage übermittelt und verarbeitet werden.</span>
         </label>
         <div><button class="btn btn-primary" type="submit">Senden</button></div>
-        <p class="hint">Entwurfsansicht. Das Formular ist noch nicht angebunden.</p>
+        <p class="hint" id="anfrage-msg" role="status" hidden></p>
       </form>
     </div>
   </section>
@@ -515,20 +516,27 @@ form{display:grid; gap:1.05rem}
           <li><a href="#sortiment">Holz-Zillen von Witti</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Rechtliches</h4>
-        <!-- Platzhalter: auf die bestehenden Seiten verlinken. -->
-        <ul>
-          <li><a href="#kontakt">Impressum</a></li>
-          <li><a href="#kontakt">Datenschutzerklärung</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
-      </div>
     </div>
     <p class="ft-note">Unverbindlicher Redesign-Entwurf für Gehr Boote. Alle Texte, Fotos und Modellbezeichnungen stammen von gehrboote.at.</p>
   </div>
 </footer>
 
+<script>
+(function () {
+  var f = document.getElementById('anfrage'); if (!f) return;
+  var msg = document.getElementById('anfrage-msg');
+  function say(t) { msg.textContent = t; msg.hidden = !t; }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = function (n) { return (f.elements[n].value || '').trim(); };
+    if (!v('nachricht')) { say('Bitte schreiben Sie uns kurz, worum es geht.'); f.elements.nachricht.focus(); return; }
+    if (!f.elements.datenschutz.checked) { say('Bitte bestätigen Sie die Einverständniserklärung.'); return; }
+    var body = v('nachricht') + '\n\n' + [v('vorname') + ' ' + v('nachname'), v('telefon'), v('email')].map(function (x) { return x.trim(); }).filter(Boolean).join('\n');
+    say('Ihr E-Mail-Programm öffnet sich mit der fertigen Nachricht an office@gehrboote.at.');
+    location.href = 'mailto:office@gehrboote.at?subject=' + encodeURIComponent('Anfrage über die Website') + '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
 <script>
 /* Symbole erst freigeben, wenn der Font geladen ist. Faellt er aus, bleibt die
    Seite ohne Symbole lesbar, statt die Ligaturnamen als Text zu zeigen. */
