@@ -42,7 +42,8 @@
   - Typography, grid, spacing. One radius system: 2px.
   - Text set as text. On the original most of it sits in images.
   - New: photo gallery (#gallery) and two workshop photos next to the
-    service list.
+    service list. Gallery: two columns, four photos up to 760px wide;
+    three columns, all six, above that.
 
   IMAGES
   Nine photos from the business's own Facebook page: customers' cars
@@ -219,13 +220,12 @@ footer p{margin:0}
 .work figure{margin:0;border-radius:var(--r);overflow:hidden;background:var(--bg-2)}
 .work img{width:100%;aspect-ratio:4/5;object-fit:cover}
 .work .w2 img{object-position:62% 50%}
-.gallery-strip{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.75rem;scrollbar-width:thin}
-.gallery-strip figure{flex:none;width:min(80%,440px);margin:0;scroll-snap-align:start;border-radius:var(--r);overflow:hidden;background:var(--bg-2)}
+.gallery-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+.gallery-strip figure{margin:0;border-radius:var(--r);overflow:hidden;background:var(--bg-2)}
 .gallery-strip img{width:100%;aspect-ratio:4/3;object-fit:cover}
-@media (min-width:900px){
-  .gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;padding-bottom:0}
-  .gallery-strip figure{width:auto}
-}
+/* Phones: four photos, two columns. From 761px: all six, three columns. */
+@media (max-width:760px){.gallery-strip figure:nth-child(n+5){display:none}}
+@media (min-width:761px){.gallery-strip{grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}}
 
 .rv{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}
 .rv.in{opacity:1;transform:none}
@@ -341,7 +341,7 @@ footer p{margin:0}
     <p class="label rv">From our Facebook page</p>
     <h2 class="rv">Gallery</h2>
     <!-- Photos from the business's Facebook page. Plates blurred. -->
-    <div class="gallery-strip" tabindex="0" aria-label="Photos, scroll sideways">
+    <div class="gallery-strip">
       <figure><img src="img/alfas-row.webp" alt="Three Alfa Romeo Giulias parked in a row" width="860" height="645" loading="lazy"></figure>
       <figure><img src="img/white-4c.webp" alt="White Alfa Romeo 4C" width="860" height="484" loading="lazy"></figure>
       <figure><img src="img/classic-coupe.webp" alt="Classic red Alfa Romeo coupe outside the workshop" width="860" height="645" loading="lazy"></figure>
